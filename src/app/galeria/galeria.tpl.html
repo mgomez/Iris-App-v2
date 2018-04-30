@@ -1,0 +1,21 @@
+<section id="galeria" class="Galeria">
+    <h3>Galeria</h3>
+    <div class="swiper-container">
+        <div class="swiper-pagination"></div>
+        <div class="swiper-wrapper">
+            {{#each this}}
+                <div class="swiper-slide">
+                    <div class="Galeria-slide">
+                        <img src="../../assets/img/verify.svg" alt="check" class="Galeria-slide-check" data-type="3" data-image="{{iImageId}}" data-student="{{iFStudentId}}">
+                        <div class="Galeria-slide-title">{{vcTitle}}</div>
+                        <div class="Galeria-slide-foto" data-id="{{iImageId}}">
+                            <img src="https://web.kinderiris.com/Areas/App/Images/galeria/{{vcFile}}" alt="{{vcTitle}}" class="Galeria-slide-foto-img">
+                        </div>
+                        <div class="Galeria-slide-descripcion">{{vcDescription}}</div>
+                        <div class="Galeria-slide-fecha">{{dtDate}}</div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</section>

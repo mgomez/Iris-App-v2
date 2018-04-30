@@ -29,6 +29,7 @@ export default {
 
         try {
             if (window.Connection) {
+                console.debug("XHR ajax:", params);
                 return $.ajax(params)
                     .fail(function(error, textstatus, message) {
                         if (textstatus === "timeout") {

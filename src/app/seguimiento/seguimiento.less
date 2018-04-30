@@ -1,0 +1,55 @@
+/**
+ *
+ * Seguimiento Academico
+ *
+ */
+
+.Seguimiento {
+    position: relative;
+}
+
+.Options {
+    position: relative;
+    &-container {
+        background: #fff;
+        position: relative;
+        margin: 35px 0;
+        border: 3px solid #000;
+        &-date {
+            font-size: 32px;
+            text-align: center;
+            background: #FF9800;
+        }
+        &-note {
+            background: #FFEB3B;
+            text-align: right;
+            padding: 0 8px;
+        }
+    }
+    &-option {
+        position: relative;
+        &-catalog {
+            background: #eee;
+            font-size: 22px;
+            font-weight: 600;
+            padding: 8px 0;
+            text-align: center;
+        }
+        &-faces {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        &-face {
+            background: #eee;
+            padding: 15px;
+            opacity: 0.2;
+            &.active {
+                opacity: 1;
+            }
+            & img {
+                display: inline-block;
+                width: 100%;
+            }
+        }
+    }
+}

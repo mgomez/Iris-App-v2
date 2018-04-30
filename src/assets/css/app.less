@@ -1,6 +1,6 @@
 /**
  *
- * Init
+ * IRIS
  *
  */
 
@@ -12,6 +12,14 @@
 @tablet: ~"only screen and (min-width: 530px) and (max-width: 949px)";
 @desktop: ~"only screen and (min-width: 950px) and (max-width: 1128px)";
 @desktop-xl: ~"only screen and (min-width: 1129px)";
+@font-face {
+    font-family: 'do_hyeonregular';
+    src: url('dohyeon-regular-webfont.woff2') format('woff2'),
+    url('dohyeon-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 *,
 *::after,
 *::before {
@@ -31,16 +39,18 @@ body {
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -webkit-user-select: none;
-    background: #ccc;
+    background: #fff url(../img/background.png) no-repeat bottom center fixed;
+    background-size: contain;
+    font-family: do_hyeonregular;
 }
 
 .invalid {
-    border-bottom-color: #F44336 !important;
+    border-color: #F44336 !important;
 }
 
 #loading {
     align-items: center;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(18, 64, 101, 0.5411764705882353));
+    background: #262424 url(../img/loading.svg) no-repeat center center fixed;
     bottom: 0;
     display: flex;
     justify-content: center;
@@ -49,4 +59,49 @@ body {
     right: 0;
     top: 0;
     z-index: 9999;
+}
+
+#layoutLogin {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Header {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    background: #eee;
+    border-bottom: 2px solid #eee;
+    padding: 8px 0;
+    margin-bottom: 35px;
+    &-link {
+        display: inline-block;
+        width: 64px;
+        background: transparent;
+        border: 0;
+        & img {
+            display: inline-block;
+            width: 100%;
+        }
+    }
+}
+
+#btn-logout {
+    background: #b7004e;
+    border-radius: 5px;
+    border: 0;
+    bottom: 8px;
+    padding: 8px;
+    position: fixed;
+    right: 8px;
+    text-align: center;
+    z-index: 999;
+    & img {
+        display: inline-block;
+        width: 24px;
+    }
 }

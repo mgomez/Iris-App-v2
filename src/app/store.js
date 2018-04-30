@@ -28,4 +28,33 @@ export default {
             data: data,
         });
     },
+    async GetImages(data) {
+        let User = await this.GetUser();
+
+        return Xhr.ajax({
+            'path': 'Data/GetImages',
+            'type': 'GET',
+            'data': data,
+            'access_token': User.access_token
+        });
+    },
+    async GetStudents() {
+        let User = await this.GetUser();
+
+        return Xhr.ajax({
+            'path': 'Data/GetStudents',
+            'type': 'GET',
+            'access_token': User.access_token
+        });
+    },
+    async GetOptions(data) {
+        let User = await this.GetUser();
+
+        return Xhr.ajax({
+            'path': 'Data/GetOptions',
+            'type': 'GET',
+            'access_token': User.access_token,
+            'data': data
+        });
+    },
 }

@@ -61,6 +61,7 @@
     "localforage": "^1.7.1",
     "moment": "^2.20.1",
     "popper.js": "^1.14.1",
-    "postcss-import": "^11.1.0"
+    "postcss-import": "^11.1.0",
+    "swiper": "^4.2.5"
   }
 }

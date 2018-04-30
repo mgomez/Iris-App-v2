@@ -1,0 +1,26 @@
+<section id="seguimiento" class="Seguimiento">
+    <h3>Seguimiento Academico</h3>
+    <form id="frm-getOptions">
+        <input type="hidden" name="iType" value="1">
+        <div class="form-group">
+            <label>Alumno</label>
+            <select name="iStudentId" id="cbAlumnos">
+                {{#each estudiantes}}
+                    <option value="{{iStudentId}}">{{vcName}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Fecha</label>
+            <div class="input-group">
+                <input type="date" name="dtIni" class="form-control" value="{{fechas.inicio}}">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">al</span>
+                </div>
+                <input type="date" name="dtEnd" class="form-control" value="{{fechas.fin}}">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-4">Ver</button>
+    </form>
+</section>
+<section id="optionsContainer" class="Seguimiento-options"></section>

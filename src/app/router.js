@@ -9,8 +9,14 @@ import layout from "./shared/layout.tpl.html";
 import layoutLogin from "./shared/layoutLogin.tpl.html";
 import offlineTpl from "./shared/offline.tpl.html";
 
+import loginModule from './login/login';
+import mainModule from './main/main';
+import galeriaModule from './galeria/galeria';
+import seguimientoModule from './seguimiento/seguimiento';
+
 export default {
     async View(page, _default) {
+        console.log(page, _default);
         var renderTpl = "";
         var User = await Store.GetUser();
 
@@ -34,8 +40,18 @@ export default {
         $("#app").html(renderTpl);
 
         switch (page) {
-            default: main.init(page);
-            break;
+            case 'main':
+                mainModule.init();
+                break;
+            case 'galeria':
+                galeriaModule.init();
+                break;
+            case 'seguimiento':
+                seguimientoModule.init();
+                break;
+            default:
+                loginModule.init(page);
+                break;
         }
     }
 };

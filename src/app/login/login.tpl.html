@@ -1,0 +1,17 @@
+<section id="login" class="Login">
+    <div class="Login-logo">
+        <img src="../../assets/img/logo.png" alt="logo.png">
+    </div>
+    <form id="frm-login" class="Login-form">
+        <input type="hidden" name="grant_type" value="password">
+        <div class="login-group">
+            <input type="text" name="User" id="inputUser" class="login-control" placeholder="Usuario" value="{{UserTemp}}">
+            <img src="../../assets/img/login-usuario.svg" alt="login-usuario" class="login-control-icon">
+        </div>
+        <div class="login-group">
+            <input type="password" name="Password" id="inputPassword" class="login-control" placeholder="Contraseña">
+            <img src="../../assets/img/locked-padlock.svg" alt="login-usuario" class="login-control-icon" id="mostrarContraseña">
+        </div>
+        <button class="btn btn-primary btn-block mt-4">Entrar</button>
+    </form>
+</section>
