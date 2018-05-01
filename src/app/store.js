@@ -57,4 +57,14 @@ export default {
             'data': data
         });
     },
+    async SetImage(data) {
+        let User = await this.GetUser();
+
+        return Xhr.ajax({
+            'path': 'Data/SetImage',
+            'type': 'POST',
+            'access_token': User.access_token,
+            'data': data
+        });
+    },
 }

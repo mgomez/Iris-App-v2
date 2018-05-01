@@ -13,6 +13,8 @@ import loginModule from './login/login';
 import mainModule from './main/main';
 import galeriaModule from './galeria/galeria';
 import seguimientoModule from './seguimiento/seguimiento';
+import galeriaMaestraModule from './galeriaMaestra/galeriaMaestra';
+
 
 export default {
     async View(page, _default) {
@@ -48,6 +50,9 @@ export default {
                 break;
             case 'seguimiento':
                 seguimientoModule.init();
+                break;
+            case 'galeriaMaestra':
+                galeriaMaestraModule.init();
                 break;
             default:
                 loginModule.init(page);

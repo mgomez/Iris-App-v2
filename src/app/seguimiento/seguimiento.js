@@ -37,7 +37,7 @@ export default {
             inicio: moment().add(-30, 'days').format('YYYY-MM-DD'),
             fin: moment().format('YYYY-MM-DD')
         }
-        console.log(fechas);
+
         var renderTpl = Tool.renderTpl(templateHtml, {
             estudiantes: estudiantes.Data,
             fechas: fechas
@@ -68,7 +68,10 @@ export default {
 
                     $("#optionsContainer").html(renderTpl);
                 }
-                $("#optionsContainer").html(renderTpl)
+                $("#optionsContainer").html(renderTpl);
+                $('html, body').animate({
+                    scrollTop: $("#optionsContainer").offset().top
+                }, 1300);
             });
 
             return false;

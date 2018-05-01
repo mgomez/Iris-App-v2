@@ -78,6 +78,8 @@ body {
     border-bottom: 2px solid #eee;
     padding: 8px 0;
     margin-bottom: 35px;
+    border-top: 15px solid #2674b3;
+    animation: borderTopColor 100s linear both infinite alternate;
     &-link {
         display: inline-block;
         width: 64px;
@@ -87,6 +89,39 @@ body {
             display: inline-block;
             width: 100%;
         }
+    }
+}
+
+@keyframes borderTopColor {
+    0% {
+        border-top-color: #b3792d;
+    }
+    10% {
+        border-top-color: #703e3d;
+    }
+    20% {
+        border-top-color: #fc8f87;
+    }
+    30% {
+        border-top-color: #da3c93;
+    }
+    40% {
+        border-top-color: #c50358;
+    }
+    50% {
+        border-top-color: #de363e;
+    }
+    60% {
+        border-top-color: #fdb530;
+    }
+    70% {
+        border-top-color: #82b32e;
+    }
+    80% {
+        border-top-color: #028161;
+    }
+    100% {
+        border-top-color: #05aab1;
     }
 }
 
@@ -103,5 +138,24 @@ body {
     & img {
         display: inline-block;
         width: 24px;
+    }
+}
+
+.formIris {
+    background: #f5f5f5;
+    border-radius: 10px;
+    border: 2px solid #eee;
+    box-shadow: 0px 5px 0px 0px #eee;
+    margin-bottom: 160px;
+    padding: 25px;
+    position: relative;
+    &.no-margin {
+        margin-bottom: 0px;
+    }
+    &-group {
+        margin-bottom: 35px;
+        &-control {
+            width: 100%;
+        }
     }
 }

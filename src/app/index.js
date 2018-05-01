@@ -117,6 +117,24 @@ window.app = {
             }
         });
 
+    },
+    takePhoto(onPhotoDataSuccess, onFail) {
+        var ios = device.platform === "iOS";
+
+        Camera.quality = (ios) ? 10 : 50;
+        Camera.targetWidth = (ios) ? 150 : 750;
+        pictureSource = navigator.camera.PictureSourceType;
+        destinationType = navigator.camera.DestinationType;
+
+        try {
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                quality: Camera.quality,
+                targetWidth: Camera.targetWidth,
+                destinationType: destinationType.DATA_URL
+            });
+        } catch (e) {
+            alert(e, navigator);
+        }
     }
 };
 

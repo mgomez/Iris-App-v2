@@ -1,10 +1,10 @@
 <section id="seguimiento" class="Seguimiento">
     <h3>Seguimiento Academico</h3>
-    <form id="frm-getOptions">
+    <form id="frm-getOptions" class="formIris">
         <input type="hidden" name="iType" value="1">
         <div class="form-group">
             <label>Alumno</label>
-            <select name="iStudentId" id="cbAlumnos">
+            <select name="iStudentId" id="cbAlumnos" class="form-control">
                 {{#each estudiantes}}
                     <option value="{{iStudentId}}">{{vcName}}</option>
                 {{/each}}
