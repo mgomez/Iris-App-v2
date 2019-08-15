@@ -1,3 +1,9 @@
+/**
+ *
+ * ROUTER
+ *
+ */
+
 'use strict';
 import $ from 'jquery';
 import localforage from 'localforage';
@@ -14,6 +20,7 @@ import mainModule from './main/main';
 import galeriaModule from './galeria/galeria';
 import seguimientoModule from './seguimiento/seguimiento';
 import galeriaMaestraModule from './galeriaMaestra/galeriaMaestra';
+import huellaDigital from "./huellaDigital/huellaDigital";
 
 
 export default {
@@ -53,6 +60,9 @@ export default {
                 break;
             case 'galeriaMaestra':
                 galeriaMaestraModule.init();
+                break;
+            case 'huellaDigital':
+                huellaDigital.init();
                 break;
             default:
                 loginModule.init(page);

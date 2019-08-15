@@ -1,0 +1,30 @@
+<!--====================================
+=            HUELLA DIGITAL            =
+=====================================-->
+<section class="section" id="huellaDigital">
+    <div class="container text-center">
+        <img src="../../assets/img/iconos/fingerprint.svg" alt="huella" class="huellaDigital-img btnEstadoHuella">
+        <div class="huellaDigital-text">
+            Si activaste la función <i>"Huella Digital"</i> en tu dispositivo y otorgaste acceso a la huella digital de otra persona, esta podrá ingresar a la aplicación <b>IRIS</b>.
+            {{#if showMessage}}
+                <div class="p-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="ckMessage">
+                        <label class="form-check-label" for="defaultCheck1">
+                            <b>Estoy de acuerdo</b>
+                        </label>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+        {{#if showMessage}}
+            <div class="form-group">
+                <label>Ingresa tu contraseña de IRIS</label>
+                <input type="password" name="password" class="form-control" id="inputPassword" disabled>
+            </div>
+        {{/if}}
+        <button class="btn btn-info btnEstadoHuella" id="btnEstadoHuella" disabled>
+            <span id="estadoHuella">Activa</span> tu huella para iniciar sesión
+        </button>
+    </div>
+</section>

@@ -15,7 +15,7 @@ import templateHtml from "./login.tpl.html";
 function validLogin(formData) {
     $(".login-control").removeClass('invalid');
 
-    if (!formData.User) {
+    if (!formData.userName) {
         $("#inputUser").addClass('invalid').focus();
         return false;
     }
@@ -63,18 +63,15 @@ export default {
             if (validLogin(formData)) {
                 app.loading(true);
 
-                _this.Login(formData).then(function(r) {
-                    var result = JSON.parse(r);
-
+                _this.Login(formData).then(function(user) {
                     app.loading(false);
-
-                    if (result.success !== 'false') {
-                        localforage.setItem('User', result.data);
-                        localforage.setItem('UserTemp', formData.User);
+                    if (user) {
+                        localforage.setItem('User', user);
+                        localforage.setItem('UserTemp', formData.userName);
 
                         Router.View('main');
                     } else {
-                        alert(result.data);
+                        alert("Ocurrió un error inesperado. intentalo más tarde.");
                     }
                 });
             }
@@ -93,7 +90,7 @@ export default {
     },
     Login(data) {
         return $.ajax({
-                url: 'https://api.kinderiris.com/Api/Account/Login',
+                url: 'https://apikinderiris.azurewebsites.net/token',
                 type: 'POST',
                 dataType: 'json',
                 data: data,
@@ -102,8 +99,8 @@ export default {
                 if (err.status === 400) {
                     var error = err.responseJSON;
                     alert(error.error_description);
-                    app.loading(false);
                 }
+                app.loading(false);
             });
     }
 }

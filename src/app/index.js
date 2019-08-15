@@ -1,4 +1,8 @@
-'use strict';
+/**
+ *
+ * INDEX
+ *
+ */
 
 import 'bootstrap/dist/css/bootstrap.css';
 import "../assets/css/app.less";
@@ -16,16 +20,30 @@ window.jQuery = $;
 
 window.Connection = true;
 
-window.app = {
-    // initialization page
-    init() {
-        var _this = this;
+localforage.config({
+    driver: localforage.LOCALSTORAGE,
+    name: 'Iris',
+    version: 2.1,
+    size: 4980736,
+    storeName: 'dbIris',
+});
 
+window.app = {
+    touchid: false,
+    activeFingerPrint: false,
+    // initialization page
+    async init() {
+        var _this = this;
+        //Polyfill para eliminar retrasos de clics en los navegadores con IU táctiles
         FastClick.attach(document.body);
+
+        _this.activeFingerPrint = await localforage.getItem("activeFingerPrint") || false;
+        _this.touchid = await localforage.getItem("touchid") || false;
 
         $(function() {
             //oculta la vista de loading
             _this.loading(false);
+            $("body").addClass('ready');
         });
         //phonegap listener
         document.addEventListener("deviceready", this.deviceReady, false);
@@ -50,6 +68,30 @@ window.app = {
         }
     },
     deviceReady() {
+        //agrega padding si es ios
+        $("body").addClass(device.platform);
+        //huella digital
+        if (device.platform === "iOS") {
+            //valida touchid disponible
+            window.plugins.touchid.isAvailable(function(type) {
+                    localforage.setItem("touchid", true);
+                    app.touchid = true;
+                },
+                function(msg) {
+                    localforage.setItem("touchid", false);
+                    app.touchid = false;
+                }
+            );
+        } else {
+            //Huella Digital - ANDROID
+            FingerprintAuth.isAvailable(function(result) {
+                app.touchid = true;
+                localforage.setItem("touchid", true);
+            }, function(message) {
+                app.touchid = false;
+                localforage.setItem("touchid", false);
+            });
+        }
         //reemplaza notificaciones por nativo
         if (navigator.notification) {
             window.alert = function(message) {
@@ -112,8 +154,9 @@ window.app = {
             console.log("Push Result", data);
 
             switch (origin) {
-                default: alert(data.message);
-                break;
+                default:
+                    alert(data.message);
+                    break;
             }
         });
 
@@ -135,6 +178,77 @@ window.app = {
         } catch (e) {
             alert(e, navigator);
         }
+    },
+    async verifyFingerprint(showUserName) {
+        var asyncVerify = $.Deferred();
+        var mensaje = "";
+
+        if (showUserName) {
+            var formData = await localforage.getItem("activeFingerPrintData");
+            var decripted = AesCtr.decrypt(formData, device.uuid, 256);
+
+            formData = JSON.parse(decripted);
+
+            var UserName = formData.userName;
+
+            mensaje = 'Usa tu huella digital para acceder a OneCard como ' + UserName + ' de forma rapida y segura'
+        } else {
+            mensaje = 'Usa tu huella digital para acceder a OneCard de forma rapida y segura';
+        }
+
+        if (device.platform === "iOS") {
+            window.plugins.touchid.verifyFingerprint(
+                mensaje,
+                function(msg) {
+                    asyncVerify.resolve(true);
+                },
+                function(msg) {
+                    asyncVerify.resolve(false);
+                }
+            );
+        } else {
+            var encryptConfig = {
+                clientId: "OneCard",
+                username: "0013zkr@gmail.com",
+                password: "XrmyikHvLFC2YDF11oHypKl0yB",
+                locale: "es",
+                dialogTitle: "One Card",
+                dialogMessage: mensaje
+            };
+
+            FingerprintAuth.encrypt(encryptConfig, encryptSuccessCallback, encryptErrorCallback);
+
+            function encryptSuccessCallback(result) {
+                localforage.setItem("UserEncrypt", result);
+
+                if (result.withFingerprint) {
+                    console.log("Encrypted credentials: " + result.token);
+                } else if (result.withBackup) {
+                    console.log("Authenticated with backup password");
+                }
+
+                asyncVerify.resolve(true);
+            }
+
+            function encryptErrorCallback(error) {
+                localforage.setItem("touchid", false);
+                app.touchid = false;
+
+                if (error === FingerprintAuth.ERRORS.FINGERPRINT_CANCELLED) {
+                    console.log("FingerprintAuth Dialog Cancelled!");
+                } else {
+                    console.log("FingerprintAuth Error: " + error);
+                }
+                asyncVerify.resolve(false);
+            }
+        }
+        return asyncVerify.promise();
+    },
+    View(view, layout) {
+        Router.View(view, layout);
+    },
+    Exit() {
+        LogOut();
     }
 };
 
