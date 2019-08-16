@@ -78,25 +78,37 @@ export default {
             $modalBody.html(renderTpl);
 
             $("#btnPagar").on("click", function() {
-                var tokenParams = {
-                    "card": {
-                        "number": "4242424242424242",
-                        "name": "Fulanito Pérez",
-                        "exp_year": "2020",
-                        "exp_month": "12",
-                        "cvc": "123",
-                        "address": {
-                            "street1": "Calle 123 Int 404",
-                            "street2": "Col. Condesa",
-                            "city": "Ciudad de Mexico",
-                            "state": "Distrito Federal",
-                            "zip": "12345",
-                            "country": "Mexico"
-                        }
-                    }
-                };
+                var OrdenDetalle = _this.OrdenDetalle;
 
-                Conekta.Token.create(tokenParams, successResponseHandler, errorResponseHandler);
+                if (OrdenDetalle.length <= 0) {
+                    alert("Ingresa correctamente la informacion necesaria.");
+                } else {
+                    var tokenParams = {
+                        "card": {
+                            "number": "4242424242424242",
+                            "name": "Fulanito Pérez",
+                            "exp_year": "2020",
+                            "exp_month": "12",
+                            "cvc": "123",
+                            "address": {
+                                "street1": "Calle 123 Int 404",
+                                "street2": "Col. Condesa",
+                                "city": "Ciudad de Mexico",
+                                "state": "Distrito Federal",
+                                "zip": "12345",
+                                "country": "Mexico"
+                            }
+                        }
+                    };
+
+                    var $form = $("#card-form");
+
+                    Conekta.Token.create($form, successResponseHandler, errorResponseHandler);
+                }
+            });
+
+            $("#card-form").on("submit", function() {
+                return false;
             });
         });
 
@@ -105,12 +117,12 @@ export default {
             var OrdenDetalle = _this.OrdenDetalle;
 
             var data = {
-                "name": "Carlos",
-                "email": "cbonilla@soluxs.com",
-                "phone": "8112451220",
+                "name": $("#name").val(),
+                "email": $("#iemail").val(),
+                "phone": $("#iphone").val(),
                 "token_id": token.id,
                 "unit_price": Enumerable.from(OrdenDetalle).sum("+$.Monto"),
-                "student": "2",
+                "student": "0",
                 "data": JSON.stringify(OrdenDetalle),
                 "comment": $("#icomment").val()
             };
@@ -123,8 +135,8 @@ export default {
         };
 
         var errorResponseHandler = function(error) {
-            // Do something on error
             console.log(error);
+            alert(error.message_to_purchaser);
         };
     }
 }

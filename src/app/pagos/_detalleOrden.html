@@ -2,10 +2,9 @@
 =            DETALLE DE ORDEN            =
 =======================================-->
 <h3>Detalle de Pago</h3>
-<table class="table table-responsive">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>Alumno</th>
             <th>Concepto</th>
             <th>Monto</th>
             <th>&nbsp;</th>
@@ -14,25 +13,70 @@
     <tbody>
         {{#each Orden}}
             <tr>
-                <td>{{NombreAlumno}}</td>
                 <td>{{NombreConcepto}}</td>
                 <td>{{currency Monto}}</td>
                 <td>
-                    <button class="btn btn-danger btn-sm">&times;</button>
+                    <button class="btn btn-danger btn-sm btnEliminarDetalleOrden" data-index="{{@index}}">&times;</button>
                 </td>
             </tr>
         {{/each}}
     </tbody>
 </table>
 <hr>
-<div class="text-center p-4">
-    <h4>TOTAL {{currency TotalOrden}}</h4>
+<div class="text-center p-2 m-2 bg-primary">
+    <h5 class="text-white">TOTAL {{currency TotalOrden}}</h5>
 </div>
 <hr>
-<div class="text-center p-2">
+<form id="card-form" class="card card-body bg-light">
+    <h3 class="card-title">Datos de la tarjeta</h3>
+    <span class="card-errors"></span>
+    <div class="form-group">
+        <label>
+            <span>Nombre del tarjetahabiente</span>
+        </label>
+        <input type="text" size="20" data-conekta="card[name]" class="form-control" id="iname">
+    </div>
+    <div class="form-group">
+        <label>
+            <span>Número de tarjeta de crédito</span>
+        </label>
+        <input type="text" size="20" data-conekta="card[number]" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>
+            <span>CVC</span>
+        </label>
+        <input type="text" size="4" data-conekta="card[cvc]" class="form-control">
+    </div>
+    <div class="form-group">
+        <div class="row justify-content-start align-items-center">
+            <div class="col">
+                <label>
+                    <span>Fecha de expiración</span>
+                </label>
+                <input type="text" size="2" data-conekta="card[exp_month]" placeholder="MM" class="form-control">
+            </div>
+            <div class="col">
+                <label><span>/</span></label>
+                <input type="text" size="4" data-conekta="card[exp_year]" placeholder="AAAA" class="form-control">
+            </div>
+        </div>
+    </div>
+</form>
+<div class="p-4">
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" id="iemail" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Telefono</label>
+        <input type="number" name="phone" id="iphone" class="form-control">
+    </div>
     <div class="form-group">
         <label>Comentarios</label>
         <textarea name="comment" id="icomment" class="form-control"></textarea>
     </div>
-    <button id="btnPagar" class="btn btn-primary btn-block">PAGAR</button>
+</div>
+<div class="text-center">
+    <button id="btnPagar" class="btn btn-primary btn-block">PAGAR <span class="badge badge-light  badge-pill">{{currency TotalOrden}}</span></button>
 </div>
