@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.kinderiris.soluxs" version="2.0.5">
+    <name>Jardin de Niños IEP</name>
+    <description>Jardin de Niños IEP App</description>
+    <author email="00.13.zkr@gmail.com">
+        SOLUXS
+    </author>
+    <preference name='phonegap-version' value='cli-7.0.1' />
+    <preference name="android-build-tool" value="gradle" />
+    <preference name="android-installLocation" value="auto" />
+    <preference name="android-minSdkVersion" value="21" />
+    <preference name="android-targetSdkVersion" value="26" />
+    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="disable-cursor" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="fullscreen" value="false" />
+    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="KeyboardResize" value="true" />
+    <preference name="KeyboardResizeMode" value="native" />
+    <preference name="orientation" value="portrait" />
+    <preference name="permissions" value="none" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="SplashScreenDelay" value="2000" />
+    <preference name="stay-in-webview" value="true" />
+    <preference name="target-device" value="universal" />
+    <preference name="webviewbounce" value="true" />
+    <!-- Core plugins -->
+    <plugin name="cordova-plugin-android-fingerprint-auth" />
+    <plugin name="cordova-plugin-touch-id" spec="3.3.1" />
+    <plugin name="cordova-plugin-vibration" spec="~3.1.0" />
+    <plugin name="cordova-plugin-dialogs" spec="~2.0.1" />
+    <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
+    <plugin name="cordova-plugin-device" spec="2.0.1" />
+    <plugin name="cordova-plugin-network-information" spec="2.0.1" />
+    <plugin name="cordova-plugin-ionic-keyboard" />
+    <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
+    <plugin name="phonegap-plugin-push" source="npm" spec="~1.9.1">
+        <param name="SENDER_ID" value="539939739166" />
+    </plugin>
+    <plugin name="cordova-plugin-x-socialsharing" source="npm" version="5.4.0" />
+    <feature name="SocialSharing">
+        <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+    </feature>
+    <feature name="SocialSharing">
+        <param name="ios-package" value="SocialSharing" />
+    </feature>
+    <icon src="icon.png" />
+    <platform name="android">
+        <icon density="ldpi" src="res/icons/android/drawable-ldpi-icon.png" />
+        <icon density="mdpi" src="res/icons/android/drawable-mdpi-icon.png" />
+        <icon density="hdpi" src="res/icons/android/drawable-hdpi-icon.png" />
+        <icon density="xhdpi" src="res/icons/android/drawable-xhdpi-icon.png" />
+        <icon density="xxhdpi" src="res/icons/android/drawable-xxhdpi-icon.png" />
+        <icon density="xxxhdpi" src="res/icons/android/drawable-xxxhdpi-icon.png" />
+        <splash density="land-ldpi" src="res/screens/android/drawable-land-ldpi-screen.png" />
+        <splash density="land-mdpi" src="res/screens/android/drawable-land-mdpi-screen.png" />
+        <splash density="land-hdpi" src="res/screens/android/drawable-land-hdpi-screen.png" />
+        <splash density="land-xhdpi" src="res/screens/android/drawable-land-xhdpi-screen.png" />
+        <splash density="land-xxhdpi" src="res/screens/android/drawable-land-xxhdpi-screen.png" />
+        <splash density="land-xxxhdpi" src="res/screens/android/drawable-land-xxxhdpi-screen.png" />
+        <splash density="port-ldpi" src="res/screens/android/drawable-port-ldpi-screen.png" />
+        <splash density="port-mdpi" src="res/screens/android/drawable-port-mdpi-screen.png" />
+        <splash density="port-hdpi" src="res/screens/android/drawable-port-hdpi-screen.png" />
+        <splash density="port-xhdpi" src="res/screens/android/drawable-port-xhdpi-screen.png" />
+        <splash density="port-xxhdpi" src="res/screens/android/drawable-port-xxhdpi-screen.png" />
+        <splash density="port-xxxhdpi" src="res/screens/android/drawable-port-xxxhdpi-screen.png" />
+    </platform>
+    <platform name="ios">
+        <icon height="57" platform="ios" src="res/icons/ios/icon.png" width="57" />
+        <icon height="114" platform="ios" src="res/icons/ios/icon@2x.png" width="114" />
+        <icon height="40" platform="ios" src="res/icons/ios/icon-40.png" width="40" />
+        <icon height="80" platform="ios" src="res/icons/ios/icon-40@2x.png" width="80" />
+        <icon height="50" platform="ios" src="res/icons/ios/icon-50.png" width="50" />
+        <icon height="100" platform="ios" src="res/icons/ios/icon-50@2x.png" width="100" />
+        <icon height="60" platform="ios" src="res/icons/ios/icon-60.png" width="60" />
+        <icon height="120" platform="ios" src="res/icons/ios/icon-60@2x.png" width="120" />
+        <icon height="180" platform="ios" src="res/icons/ios/icon-60@3x.png" width="180" />
+        <icon height="72" platform="ios" src="res/icons/ios/icon-72.png" width="72" />
+        <icon height="144" platform="ios" src="res/icons/ios/icon-72@2x.png" width="144" />
+        <icon height="76" platform="ios" src="res/icons/ios/icon-76.png" width="76" />
+        <icon height="152" platform="ios" src="res/icons/ios/icon-76@2x.png" width="152" />
+        <icon height="29" platform="ios" src="res/icons/ios/icon-small.png" width="29" />
+        <icon height="58" platform="ios" src="res/icons/ios/icon-small@2x.png" width="58" />
+        <icon height="87" platform="ios" src="res/icons/ios/icon-small@3x.png" width="87" />
+        <splash height="1136" platform="ios" src="res/screens/ios/Default-568h@2x~iphone.png" width="640" />
+        <splash height="1334" platform="ios" src="res/screens/ios/Default-667h.png" width="750" />
+        <splash height="2208" platform="ios" src="res/screens/ios/Default-736h.png" width="1242" />
+        <splash height="1242" platform="ios" src="res/screens/ios/Default-Landscape-736h.png" width="2208" />
+        <splash height="1536" platform="ios" src="res/screens/ios/Default-Landscape@2x~ipad.png" width="2048" />
+        <splash height="768" platform="ios" src="res/screens/ios/Default-Landscape~ipad.png" width="1024" />
+        <splash height="2048" platform="ios" src="res/screens/ios/Default-Portrait@2x~ipad.png" width="1536" />
+        <splash height="1024" platform="ios" src="res/screens/ios/Default-Portrait~ipad.png" width="768" />
+        <splash height="960" platform="ios" src="res/screens/ios/Default@2x~iphone.png" width="640" />
+        <splash height="480" platform="ios" src="res/screens/ios/Default~iphone.png" width="320" />
+    </platform>
+    <gap:config-file platform="ios" parent="CFBundleShortVersionString">
+        <string>102</string>
+    </gap:config-file>
+    <gap:config-file platform="ios" parent="NSCameraUsageDescription" overwrite="true">
+        <string>Fotos de tus alumnos</string>
+    </gap:config-file>
+    <gap:config-file platform="ios" parent="NSPhotoLibraryUsageDescription" overwrite="true">
+        <string>Fotos de tus alumnos</string>
+    </gap:config-file>
+    <access origin="*" />
+    <access origin="mailto:*" launch-external="yes" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <engine name="ios" spec="^4.5.4" />
+    <engine name="android" spec="^7.0.0" />
+</widget>

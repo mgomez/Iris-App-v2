@@ -1,0 +1,56 @@
+<!--===========================
+=            PAGOS            =
+============================-->
+<section id="pagos" class="pagos">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Pagos</h3>
+            <form id="frmAgregarDetalleOrden">
+                <div class="form-group">
+                    <label>Alumnos</label>
+                    <select name="Alumno" id="cbAlumnos" class="form-control" required>
+                        <option value="" selected disabled>Seleccione</option>
+                        {{#each Alumnos}}
+                            <option value="{{iStudentId}}">{{vcName}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Concepto</label>
+                    <select name="Concepto" id="cbConceptos" class="form-control" required>
+                        <option value="" selected disabled>Seleccione</option>
+                        {{#each Conceptos}}
+                            <option value="{{iTypeId}}">{{vcType}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Monto</label>
+                    <input type="number" name="Monto" id="iMonto" min="10" class="form-control" required>
+                </div>
+                <button class="btn btn-info">Agregar</button>
+            </form>
+            <hr>
+            <div class="text-center">
+                <button class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#modalDetalleOrden">PAGAR <span id="numeroDetallesOrden" class="badge badge-primary badge-pill">0</span></button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Modal -->
+<div class="modal modal-fullscreen" id="modalDetalleOrden" tabindex="-1" role="dialog" aria-labelledby="modalDetalleOrden" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -47,6 +47,15 @@ export default {
             'access_token': User.access_token
         });
     },
+    async GetPaymentType() {
+        let User = await this.GetUser();
+
+        return Xhr.ajax({
+            'path': 'Data/GetPaymentType',
+            'type': 'GET',
+            'access_token': User.access_token
+        });
+    },
     async GetOptions(data) {
         let User = await this.GetUser();
 
@@ -62,6 +71,16 @@ export default {
 
         return Xhr.ajax({
             'path': 'Data/SetImage',
+            'type': 'POST',
+            'access_token': User.access_token,
+            'data': data
+        });
+    },
+    async SetPayment(data) {
+        let User = await this.GetUser();
+
+        return Xhr.ajax({
+            'path': 'Conekta/SetPayment',
             'type': 'POST',
             'access_token': User.access_token,
             'data': data

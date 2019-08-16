@@ -4,21 +4,24 @@
  *
  */
 
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap4-fs-modal/dist/css/bootstrap-fs-modal.css";
 import "../assets/css/app.less";
 
 import $ from 'jquery';
+import "bootstrap";
 import FastClick from "fastclick";
 import Enumerable from 'linq';
 import localforage from 'localforage';
 import currencyFormatter from 'currency-formatter';
 import Router from './router';
 
-require('bootstrap');
-
 window.jQuery = $;
 
 window.Connection = true;
+
+Conekta.setPublicKey("key_NpQddeysfUPMiEi8f4qWmKg");
+Conekta.setLanguage("es");
 
 localforage.config({
     driver: localforage.LOCALSTORAGE,
@@ -55,7 +58,7 @@ window.app = {
 
         //valida que exista el Usuario en la memoria del telefono y que este verificado
         if (User) {
-            Router.View('main');
+            Router.View('pagos');
         } else {
             Router.View('login', true);
         }

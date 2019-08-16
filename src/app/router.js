@@ -21,6 +21,7 @@ import galeriaModule from './galeria/galeria';
 import seguimientoModule from './seguimiento/seguimiento';
 import galeriaMaestraModule from './galeriaMaestra/galeriaMaestra';
 import huellaDigital from "./huellaDigital/huellaDigital";
+import pagos from "./pagos/pagos";
 
 
 export default {
@@ -63,6 +64,9 @@ export default {
                 break;
             case 'huellaDigital':
                 huellaDigital.init();
+                break;
+            case 'pagos':
+                pagos.init();
                 break;
             default:
                 loginModule.init(page);

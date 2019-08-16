@@ -61,7 +61,7 @@ body {
         background: transparent url(../img/background.svg) no-repeat bottom center fixed;
         z-index: -1;
         height: 100px;
-        background-size: contain;
+        background-size: 100%;
         transform: translateY(100px);
         transition: all 1s ease-in;
     }
@@ -105,10 +105,11 @@ body {
     animation: borderTopColor 100s linear both infinite alternate;
 
     &-link {
-        display: inline-block;
+        display: block;
         width: 64px;
         background: transparent;
         border: 0;
+        margin: 10px;
 
         & img {
             display: inline-block;

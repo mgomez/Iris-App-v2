@@ -1,0 +1,38 @@
+<!--======================================
+=            DETALLE DE ORDEN            =
+=======================================-->
+<h3>Detalle de Pago</h3>
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Alumno</th>
+            <th>Concepto</th>
+            <th>Monto</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each Orden}}
+            <tr>
+                <td>{{NombreAlumno}}</td>
+                <td>{{NombreConcepto}}</td>
+                <td>{{currency Monto}}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm">&times;</button>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+<hr>
+<div class="text-center p-4">
+    <h4>TOTAL {{currency TotalOrden}}</h4>
+</div>
+<hr>
+<div class="text-center p-2">
+    <div class="form-group">
+        <label>Comentarios</label>
+        <textarea name="comment" id="icomment" class="form-control"></textarea>
+    </div>
+    <button id="btnPagar" class="btn btn-primary btn-block">PAGAR</button>
+</div>
