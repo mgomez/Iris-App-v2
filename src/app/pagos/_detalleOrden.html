@@ -34,31 +34,49 @@
         <label>
             <span>Nombre del tarjetahabiente</span>
         </label>
-        <input type="text" size="20" data-conekta="card[name]" class="form-control" id="iname" value="Cesar Manuel Gomez M">
+        <input type="text" size="20" name="name" class="form-control" id="iname" value="Cesar Manuel Gomez M">
     </div>
     <div class="form-group">
         <label>
             <span>Número de tarjeta de crédito</span>
         </label>
-        <input type="text" size="20" data-conekta="card[number]" class="form-control" value="4242424242424242">
+        <input type="text" size="20" name="number" class="form-control" value="4242424242424242">
     </div>
     <div class="form-group">
         <label>
             <span>CVC</span>
         </label>
-        <input type="text" size="4" data-conekta="card[cvc]" class="form-control" value="1312">
+        <input type="text" size="4" name="cvc" class="form-control" value="1312">
     </div>
     <div class="form-group">
-        <div class="row justify-content-start align-items-center">
+        <label>
+            <span>Fecha de expiración</span>
+        </label>
+        <div class="row">
             <div class="col">
-                <label>
-                    <span>Fecha de expiración</span>
-                </label>
-                <input type="text" size="2" data-conekta="card[exp_month]" placeholder="MM" class="form-control" value="01">
+                <select class="form-control" name="exp_month">
+                    <option value='' selected disabled>Mes</option>
+                    <option value='01'>ENE (01)</option>
+                    <option value='02'>FEB (02)</option>
+                    <option value='03'>MAR (03)</option>
+                    <option value='04'>ABR (04)</option>
+                    <option value='05'>MAY (05)</option>
+                    <option value='06'>JUN (06)</option>
+                    <option value='07'>JUL (07)</option>
+                    <option value='08'>AGO (08)</option>
+                    <option value='09'>SEP (09)</option>
+                    <option value='10'>OCT (10)</option>
+                    <option value='11'>NOV (11)</option>
+                    <option value='12'>DIC (12)</option>
+                </select>
             </div>
             <div class="col">
-                <label><span>/</span></label>
-                <input type="text" size="4" data-conekta="card[exp_year]" placeholder="AAAA" class="form-control" value="2020">
+                <select class="form-control" name="exp_year">
+                    <option value='' selected disabled>Año</option>
+                    {{#each expirationYear}}
+                        <option value="{{value}}">{{text}}</option>
+                    {{/each}}
+                </select>
             </div>
         </div>
     </div>

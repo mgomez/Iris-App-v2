@@ -7,30 +7,34 @@
             <img src="../../assets/img/photo-camera-with-heart.svg" class="GaleriaMaestra-camara-boton-img">
         </button>
     </div>
-    <h3>Galeria</h3>
-    <form id="frm-setImage" class="formIris">
-        <input type="hidden" name="iType" value="1">
-        <input type="hidden" name="iImageId" value="1">
-        <div class="form-group">
-            <label>Titulo</label>
-            <input type="text" name="vcTitle" class="form-control" required>
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Galeria</h3>
+            <form id="frm-setImage">
+                <input type="hidden" name="iType" value="1">
+                <input type="hidden" name="iImageId" value="1">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <input type="text" name="vcTitle" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Alumno</label>
+                    <select name="iStudentId" id="cbAlumnos" class="form-control">
+                        {{#each Estudiantes}}
+                            <option value="{{iStudentId}}">{{vcName}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="GaleriaMaestra-preview">
+                    <input type="hidden" id="studentImage-b64" name="b64">
+                    <img src="" class="img-fluid" id="studentImage-img">
+                </div>
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <textarea name="vcDescription" class="form-control" required=""></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-4">Guardar</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label>Alumno</label>
-            <select name="iStudentId" id="cbAlumnos" class="form-control">
-                {{#each Estudiantes}}
-                    <option value="{{iStudentId}}">{{vcName}}</option>
-                {{/each}}
-            </select>
-        </div>
-        <div class="GaleriaMaestra-preview">
-            <input type="hidden" id="studentImage-b64" name="b64">
-            <img src="" class="img-fluid" id="studentImage-img">
-        </div>
-        <div class="form-group">
-            <label>Descripcion</label>
-            <textarea name="vcDescription" class="form-control" required=""></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block mt-4">Ver</button>
-    </form>
+    </div>
 </section>

@@ -14,18 +14,27 @@ import Store from '../store';
 import templateHtml from "./galeria.tpl.html";
 
 export default {
+    Dates: [],
     init() {
         this.render();
     },
     async render() {
+        var _this = this;
+        var GetDates = await Store.GetDates();
+
         var Galeria = await Store.GetImages({
-            iType: 1,
-            dtIni: '1900-01-01',
-            dtEnd: '1900-01-01',
-            iStudentId: 7
+            iType: 2,
+            iDateId: 49,
+            iStudentId: 2
         });
 
-        var renderTpl = Tool.renderTpl(templateHtml, Galeria.Data);
+        _this.Dates = GetDates.Data;
+
+
+        var renderTpl = Tool.renderTpl(templateHtml, {
+            Galeria: Galeria.Data,
+            Fechas: GetDates.Data
+        });
 
         $("#renderBody").html(renderTpl);
 
@@ -33,6 +42,23 @@ export default {
     },
     handleEvents() {
         var _this = this;
+
+        $("#frmGetImages").on("submit", async function() {
+            var $frm = $(this);
+            var formData = $frm.serializeObject();
+
+            var Galeria = await Store.GetImages(formData);
+
+
+            var renderTpl = Tool.renderTpl(templateHtml, {
+                Galeria: Galeria.Data,
+                Fechas: _this.Dates
+            });
+
+            $("#renderBody").html(renderTpl);
+
+            return false;
+        });
 
         var mySwiper = new Swiper('.swiper-container', {
             direction: 'horizontal',
@@ -45,13 +71,16 @@ export default {
 
         $(".Galeria-slide-check").on("click", function() {
             var $btn = $(this);
+            var $slide = $btn.parent(".Galeria-slide");
             var data = {
                 iType: $btn.data("type"),
                 iImageId: $btn.data("image"),
                 iStudentId: $btn.data("student")
             };
 
-            console.log(data);
+            Store.SetImage(data).then(function(r) {
+                app.View('galeria');
+            });
         });
     }
 }

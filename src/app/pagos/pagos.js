@@ -10,6 +10,7 @@ import localforage from 'localforage';
 import Tool from '../utils/tool';
 import Router from '../router';
 import Store from '../store';
+import moment from 'moment';
 import html2canvas from 'html2canvas';
 import templateHtml from "./pagos.html";
 import _detalleOrden from './_detalleOrden.html';
@@ -74,9 +75,22 @@ export default {
         $("#modalDetalleOrden").on("show.bs.modal", function() {
             var $modalBody = $(this).find(".modal-body");
             var OrdenDetalle = _this.OrdenDetalle;
+            var expirationYear = [];
+
+            for (var option = 0; option <= 20; option++) {
+                var year = moment().add('years', option).format('YYYY');
+                var yearValue = year.substring(2);
+
+                expirationYear.push({
+                    'text': year,
+                    'value': yearValue
+                });
+            };
+
             var renderTpl = Tool.renderTpl(_detalleOrden, {
                 Orden: OrdenDetalle,
-                TotalOrden: Enumerable.from(OrdenDetalle).sum("+$.Monto")
+                TotalOrden: Enumerable.from(OrdenDetalle).sum("+$.Monto"),
+                expirationYear: expirationYear
             });
 
             $modalBody.html(renderTpl);
@@ -87,27 +101,14 @@ export default {
                 if (OrdenDetalle.length <= 0) {
                     alert("Ingresa correctamente la informacion necesaria.");
                 } else {
+                    var $form = $("#card-form");
                     var tokenParams = {
-                        "card": {
-                            "number": "4242424242424242",
-                            "name": "Fulanito Pérez",
-                            "exp_year": "2020",
-                            "exp_month": "12",
-                            "cvc": "123",
-                            "address": {
-                                "street1": "Calle 123 Int 404",
-                                "street2": "Col. Condesa",
-                                "city": "Ciudad de Mexico",
-                                "state": "Distrito Federal",
-                                "zip": "12345",
-                                "country": "Mexico"
-                            }
-                        }
+                        "card": $form.serializeObject()
                     };
 
-                    var $form = $("#card-form");
+                    console.log(tokenParams);
 
-                    Conekta.Token.create($form, successResponseHandler, errorResponseHandler);
+                    Conekta.Token.create(tokenParams, successResponseHandler, errorResponseHandler);
                 }
             });
 
@@ -155,15 +156,13 @@ export default {
                         var $btn = $(this);
 
                         html2canvas(document.querySelector("#comprobantePago")).then(canvas => {
-                            $("#modalDetalleOrden .modal-body").html(canvas);
+                            //$("#modalDetalleOrden .modal-body").html(canvas);
                             var base64img = canvas.toDataURL("image/jpeg");
 
                             console.log(base64img);
                             window.plugins.socialsharing.share(null, 'Comprobante de pago IRIS', base64img, null);
                         });
                     });
-
-                    //alert("Se realizó correctamente el pago!");
                 }
             });
         };

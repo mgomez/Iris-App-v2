@@ -10,46 +10,82 @@
 
 .Options {
     position: relative;
+
     &-container {
         background: #fff;
         position: relative;
         margin: 35px 0;
         border: 3px solid #000;
+
         &-date {
             font-size: 32px;
             text-align: center;
             background: #FF9800;
         }
+
         &-note {
             background: #FFEB3B;
             text-align: right;
             padding: 0 8px;
         }
     }
+
     &-option {
         position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
         &-catalog {
-            background: #eee;
             font-size: 22px;
             font-weight: 600;
-            padding: 8px 0;
+            padding: 5px;
             text-align: center;
+            display: inline-block;
         }
+
         &-faces {
-            display: flex;
+            display: inline-flex;
             flex-wrap: nowrap;
         }
+
         &-face {
-            background: #eee;
             padding: 15px;
             opacity: 0.2;
+
             &.active {
                 opacity: 1;
+                .pulsate-bck;
             }
+
             & img {
                 display: inline-block;
-                width: 100%;
+                width: 24px;
             }
         }
+    }
+}
+
+
+/**
+ * ----------------------------------------
+ * animation pulsate-bck
+ * ----------------------------------------
+ */
+.pulsate-bck {
+    animation: pulsate-bck 0.5s ease-in-out infinite both;
+}
+
+@keyframes pulsate-bck {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }

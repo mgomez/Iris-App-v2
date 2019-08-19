@@ -35,12 +35,17 @@ html {
     touch-action: manipulation;
 }
 
+html,
+body {
+    min-height: 100vh;
+}
+
 body {
     font-size: 16px;
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -webkit-user-select: none;
-    background: #fff url("../img/icono.svg") no-repeat center fixed;
+    background: #fff url("../img/icono.svg") no-repeat bottom fixed;
     background-size: contain;
     font-family: do_hyeonregular;
     position: relative;
@@ -60,15 +65,20 @@ body {
         left: 0;
         background: transparent url(../img/background.svg) repeat-x bottom center fixed;
         z-index: -1;
-        height: 100px;
-        background-size: 100%;
-        transform: translateY(100px);
+        height: 10vh;
+        background-size: 80%;
+        transform: translateY(10vh);
         transition: all 1s ease-in;
-        animation: colores .0.5s linear;
+
+        @media (min-width: 500px) {
+            background-size: 50%;
+        }
     }
 }
 
-@keyframes colores {}
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+}
 
 .hide {
     display: none;

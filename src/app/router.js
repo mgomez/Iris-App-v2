@@ -45,7 +45,7 @@ export default {
         //cargo el layout
         renderTpl = (!_default) ? layout : layoutLogin;
 
-        renderTpl = Tool.renderTpl(renderTpl);
+        renderTpl = Tool.renderTpl(renderTpl, User);
 
         $("#app").html(renderTpl);
 

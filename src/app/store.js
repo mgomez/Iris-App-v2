@@ -86,4 +86,12 @@ export default {
             'data': data
         });
     },
+    async GetDates() {
+        let User = await this.GetUser();
+
+        return Xhr.ajax({
+            'path': 'Data/GetDates',
+            'access_token': User.access_token
+        });
+    }
 }

@@ -31,12 +31,13 @@ export default {
         var _this = this;
 
         $("#btn-takePhoto").on("click", function() {
-            app.takePhoto(function() {
+            app.getPicture("CAMERA").then(function(imageData) {
                 $("#studentImage-b64").val(imageData);
                 $("#studentImage-img").attr("src", "data:image/jpeg;base64," + imageData);
                 $(".GaleriaMaestra-preview").show();
-            }, function() {
-                alert("Error al procesar la imagen.");
+            }, function(err) {
+                console.log(err);
+                alert("La camara no esta disponible por el momento. vuelve a intentarlo.")
             });
         });
 
@@ -46,7 +47,11 @@ export default {
 
             Store.SetImage(formData).then(function(r) {
                 console.log(r);
+                alert("Listo.");
+                $frm[0].reset();
+                $(".GaleriaMaestra-preview").hide();
             });
+
             return false;
         });
     }

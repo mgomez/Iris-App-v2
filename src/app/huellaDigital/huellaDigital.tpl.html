@@ -17,14 +17,16 @@
                 </div>
             {{/if}}
         </div>
-        {{#if showMessage}}
-            <div class="form-group">
-                <label>Ingresa tu contraseña de IRIS</label>
-                <input type="password" name="password" class="form-control" id="inputPassword" disabled>
-            </div>
-        {{/if}}
-        <button class="btn btn-info btnEstadoHuella" id="btnEstadoHuella" disabled>
-            <span id="estadoHuella">Activa</span> tu huella para iniciar sesión
-        </button>
+        <div class="card card-body">
+            {{#if showMessage}}
+                <div class="form-group">
+                    <label>Ingresa tu contraseña de IRIS</label>
+                    <input type="password" name="password" class="form-control" id="inputPassword" disabled>
+                </div>
+            {{/if}}
+            <button class="btn btn-info btnEstadoHuella" id="btnEstadoHuella" disabled>
+                <span id="estadoHuella">Activa</span> tu huella para iniciar sesión
+            </button>
+        </div>
     </div>
 </section>

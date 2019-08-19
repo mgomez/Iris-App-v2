@@ -17,7 +17,7 @@ import currencyFormatter from 'currency-formatter';
 import Router from './router';
 var AesCtr = require("../assets/js/aes-ctr");
 
-window.jQuery = $;
+window.$ = $;
 
 window.Connection = true;
 
@@ -59,7 +59,7 @@ window.app = {
 
         //valida que exista el Usuario en la memoria del telefono y que este verificado
         if (User) {
-            Router.View('pagos');
+            Router.View('main');
         } else {
             Router.View('login', true);
         }
@@ -123,11 +123,11 @@ window.app = {
         app.setupPush();
         //oculto el footer si el teclado se muestra
         window.addEventListener('keyboardDidShow', function() {
-
+            $("#btn-logout").hide();
         });
 
         window.addEventListener('keyboardDidHide', function() {
-
+            $("#btn-logout").show();
         });
     },
     setupPush() {
@@ -160,6 +160,32 @@ window.app = {
             alert(data.message);
         });
 
+    },
+    getPicture(pictureSource) {
+        var Deferred = $.Deferred();
+        try {
+            var PictureSourceType = Camera.PictureSourceType[pictureSource];
+            var config = {
+                quality: (device.platform !== 'Android') ? 50 : 80,
+                destinationType: Camera.DestinationType.DATA_URL,
+                sourceType: PictureSourceType,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 750,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false
+            };
+
+            navigator.camera.getPicture(function(imageData) {
+                //$img.attr("src", "data:image/jpeg;base64," + imageData);
+                Deferred.resolve(imageData);
+            }, function(message) {
+                return Deferred.reject(message);
+            }, config);
+
+            return Deferred.promise();
+        } catch (e) {
+            return Deferred.reject(e);
+        }
     },
     takePhoto(onPhotoDataSuccess, onFail) {
         var ios = device.platform === "iOS";

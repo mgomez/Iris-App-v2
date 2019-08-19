@@ -3,18 +3,20 @@
  * Galeria
  *
  */
+@bordeFoto: 5px;
 
 .Galeria {
     &-slide {
         background: #fff url(../../assets/img/Pacman-1s-200px.svg) no-repeat center center;
         background-size: 50%;
-        border-top: 2px solid #db3a92;
-        border-right: 2px solid #fa4d34;
-        border-bottom: 2px solid #81b32d;
-        border-left: 2px solid #2cb4ed;
+        border-top: @bordeFoto solid #db3a92;
+        border-right: @bordeFoto solid #fa4d34;
+        border-bottom: @bordeFoto solid #81b32d;
+        border-left: @bordeFoto solid #2cb4ed;
         margin: 20px 0 100px 0;
         overflow: hidden;
         position: relative;
+
         &-check {
             position: absolute;
             top: 7px;
@@ -22,16 +24,19 @@
             display: inline-block;
             width: 32px;
         }
+
         &-title {
             font-size: 24px;
             padding: 8px;
             color: #272727;
             width: 80%;
         }
+
         &-descripcion {
             padding: 35px;
             background: #fff;
         }
+
         &-fecha {
             background: #e0e0e0;
             font-size: 12px;
@@ -39,11 +44,15 @@
             text-align: right;
             padding: 8px;
         }
+
         &-foto {
             min-height: 150px;
+            text-align: center;
+
             &-img {
                 display: inline-block;
-                width: 100%;
+                width: 95%;
+                border-radius: 10px;
             }
         }
     }
