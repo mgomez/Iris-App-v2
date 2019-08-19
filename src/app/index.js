@@ -15,6 +15,7 @@ import Enumerable from 'linq';
 import localforage from 'localforage';
 import currencyFormatter from 'currency-formatter';
 import Router from './router';
+var AesCtr = require("../assets/js/aes-ctr");
 
 window.jQuery = $;
 
@@ -99,7 +100,7 @@ window.app = {
         if (navigator.notification) {
             window.alert = function(message) {
                 navigator.vibrate(100);
-                navigator.notification.alert(message, null, "APP NAME", 'OK');
+                navigator.notification.alert(message, null, "Iris Enseñanza Preescolar", 'OK');
             };
         }
         //tap menu
@@ -132,9 +133,12 @@ window.app = {
     setupPush() {
         var push = PushNotification.init({
             "android": {
-                "senderID": "678355429347"
+                "senderID": "539939739166"
             },
-            "browser": {},
+            "browser": {
+                "pushServiceURL": 'http://push.api.phonegap.com/v1/push',
+                "applicationServerKey": "BL918Q7BmCeOBMom7IGxuLHZWCl11Ob7qzIdce3bGLnvKKx_jrcpqNkPjbEswISebb1ePSW1nah5klDn78N_2Kg"
+            },
             "ios": {
                 "sound": true,
                 "vibration": true,
@@ -144,7 +148,7 @@ window.app = {
         });
 
         push.on('registration', function(data) {
-            localforage.setItem('registrationId', data.registrationId);
+            localforage.setItem('deviceId', data.registrationId);
         });
 
         push.on('error', function(e) {
@@ -152,15 +156,8 @@ window.app = {
         });
 
         push.on('notification', function(data) {
-            var origin = (data.additionalData) ? data.additionalData.origin : "";
-
-            console.log("Push Result", data);
-
-            switch (origin) {
-                default:
-                    alert(data.message);
-                    break;
-            }
+            console.log(data);
+            alert(data.message);
         });
 
     },
@@ -194,9 +191,9 @@ window.app = {
 
             var UserName = formData.userName;
 
-            mensaje = 'Usa tu huella digital para acceder a OneCard como ' + UserName + ' de forma rapida y segura'
+            mensaje = 'Usa tu huella digital para acceder a IRIS como ' + UserName + ' de forma rapida y segura'
         } else {
-            mensaje = 'Usa tu huella digital para acceder a OneCard de forma rapida y segura';
+            mensaje = 'Usa tu huella digital para acceder a IRIS de forma rapida y segura';
         }
 
         if (device.platform === "iOS") {
@@ -211,11 +208,11 @@ window.app = {
             );
         } else {
             var encryptConfig = {
-                clientId: "OneCard",
+                clientId: "IRIS",
                 username: "0013zkr@gmail.com",
                 password: "XrmyikHvLFC2YDF11oHypKl0yB",
                 locale: "es",
-                dialogTitle: "One Card",
+                dialogTitle: "IRIS",
                 dialogMessage: mensaje
             };
 

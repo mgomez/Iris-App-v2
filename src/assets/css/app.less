@@ -58,13 +58,20 @@ body {
         bottom: 0;
         width: 100vw;
         left: 0;
-        background: transparent url(../img/background.svg) no-repeat bottom center fixed;
+        background: transparent url(../img/background.svg) repeat-x bottom center fixed;
         z-index: -1;
         height: 100px;
         background-size: 100%;
         transform: translateY(100px);
         transition: all 1s ease-in;
+        animation: colores .0.5s linear;
     }
+}
+
+@keyframes colores {}
+
+.hide {
+    display: none;
 }
 
 .invalid {

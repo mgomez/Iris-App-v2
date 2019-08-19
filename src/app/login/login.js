@@ -29,6 +29,7 @@ function validLogin(formData) {
 }
 
 export default {
+    cambioHuella: false,
     init(e) {
         console.log("LOGIN", e);
         this.render();
@@ -44,6 +45,33 @@ export default {
     },
     handleEvents() {
         var _this = this;
+        if (app.activeFingerPrint) {
+            $("#activeFingerPrint").show();
+
+            $("#botonIngresarHuellaDigital").on("click", function() {
+                app.verifyFingerprint(true).then(async function(r) {
+                    if (r) {
+                        var formData = await localforage.getItem("activeFingerPrintData");
+                        var decripted = AesCtr.decrypt(formData, device.uuid, 256);
+                        var data = JSON.parse(decripted);
+
+                        _this.Login(data).then(function(user) {
+                            app.loading(false);
+                            if (user) {
+                                localforage.setItem('User', user);
+                                localforage.setItem('UserTemp', formData.userName);
+
+                                Router.View('main');
+                            } else {
+                                alert("Ocurrió un error inesperado. intentalo más tarde.");
+                            }
+                        }, function(err) {
+                            alert("Ocurrió un error inesperado. intentalo más tarde.");
+                        });
+                    }
+                });
+            });
+        }
         //Mostrar contraseña
         $("#mostrarContraseña").on("click", function() {
             var $el = $(this);

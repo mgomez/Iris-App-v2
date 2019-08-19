@@ -1,0 +1,39 @@
+<div id="comprobantePago" class="card">
+    <div class="card-body">
+        <h3 class="text-success text-center">Operación Exitosa!</h3>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <label class="text-info">Clave de Rastreo</label>
+                <span class="text-muted">{{AuthCode}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <label class="text-info">Referencia</label>
+                <span class="text-muted">{{Order}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <label class="text-info">Comentarios</label>
+                <span class="text-muted">{{comment}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <label class="text-info">Correo electrónico</label>
+                <span class="text-muted">{{email}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <label class="text-info">Nombre</label>
+                <span class="text-muted">{{name}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <label class="text-info">Telefono</label>
+                <span class="text-muted">{{phone}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <label class="text-info">Importe</label>
+                <span class="text-muted">{{unit_price}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<hr>
+<div class="text-center">
+    <button id="btnCompartirOrden" class="btn btn-outline-info">Compartir</button>
+</div>
