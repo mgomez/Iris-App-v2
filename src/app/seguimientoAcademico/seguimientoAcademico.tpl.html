@@ -4,9 +4,10 @@
 <section id="seguimiento" class="Seguimiento">
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title">Seguimiento Academico</h3>
+            <h3 class="card-title">Seguimiento Académico</h3>
             <form id="frm-getOptions">
-                <input type="hidden" name="iType" value="1">
+                <input type="hidden" name="iType" value="3">
+                <input type="hidden" name="iDateId" value="1">
                 {{#if esUnico}}
                     <input type="hidden" name="iStudentId" value="{{iStudentId}}">
                 {{else}}
@@ -19,14 +20,6 @@
                         </select>
                     </div>
                 {{/if}}
-                <div class="form-group">
-                    <label>Periodo</label>
-                    <select name="iDateId" id="cbPeriodo" class="form-control">
-                        {{#each Fechas}}
-                            <option value="{{iDateId}}">{{vcDate}}</option>
-                        {{/each}}
-                    </select>
-                </div>
                 <button type="submit" class="btn btn-primary btn-block mt-4">Ver</button>
             </form>
         </div>

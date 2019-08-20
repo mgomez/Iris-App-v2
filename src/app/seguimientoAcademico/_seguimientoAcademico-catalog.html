@@ -1,0 +1,19 @@
+<!--=====================================================
+=            Seguimiento Academico CATALOGOS            =
+======================================================-->
+{{#each this}}
+    <div data-catalog="{{iCatalogId}}" class="seguimientoAcademico-catalog">
+        <div class="seguimientoAcademico-catalog-title">{{vcCatalog}}</div>
+        <div class="seguimientoAcademico-catalog-buttonsGroup">
+            <button type="button" class="seguimientoAcademico-catalog-button smile selected" data-value="{{iCatalogId}}-1">
+                <i class="fa fa-smile-o" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="seguimientoAcademico-catalog-button meh" data-value="{{iCatalogId}}-2">
+                <i class="fa fa-meh-o" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="seguimientoAcademico-catalog-button frown" data-value="{{iCatalogId}}-3">
+                <i class="fa fa-frown-o" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+{{/each}}

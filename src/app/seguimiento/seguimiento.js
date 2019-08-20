@@ -16,15 +16,20 @@ import templateHtml from "./seguimiento.tpl.html";
 import _optionsTpl from './_optionsTpl.html';
 
 function renderOptions(options) {
-    var _options = Enumerable.from(options).groupBy("$.dtDate").select(function(el) {
-        var fecha = moment(el.key()).format('LL');
+    var _options = Enumerable.from(options)
+        .groupBy("$.dtDate")
+        .select(function(el) {
+            var fecha = moment(el.key()).format('dddd DD MMM');
 
-        return {
-            fecha: fecha,
-            options: el.getSource(),
-            nota: el.getSource()[0].vcNote
-        };
-    }).orderByDescending("$.fecha").toArray();
+            return {
+                fecha: fecha,
+                options: el.getSource(),
+                nota: el.getSource()[0].vcNote,
+                sort: moment(el.key()).format('YYYYMMDD')
+            };
+        })
+        .orderByDescending("$.sort")
+        .toArray();
 
     return _options;
 }

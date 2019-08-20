@@ -3,23 +3,32 @@
 ==================================-->
 {{#each this}}
     <div class="Options-container">
-        <div class="Options-container-date">{{fecha}}</div>
-        <div class="Options-container-note">{{nota}}</div>
-        {{#each options}}
-            <div class="Options-option">
-                <div class="Options-option-catalog">{{vcCatalog}}</div>
-                <div class="Options-option-faces">
-                    <div class="Options-option-face smile {{#if bOption1}}active{{/if}}">
-                        <img src="../../assets/img/smiling-face.svg">
-                    </div>
-                    <div class="Options-option-face line {{#if bOption2}}active{{/if}}">
-                        <img src="../../assets/img/serious.svg">
-                    </div>
-                    <div class="Options-option-face sad {{#if bOption3}}active{{/if}}">
-                        <img src="../../assets/img/sad-face.svg">
+        <form class="frmSetOption">
+            <input type="hidden" name="iType" value="1">
+            <input type="hidden" name="iRelationId" value="0">
+            <input type="hidden" name="iStudentId" value="{{../iStudentId}}">
+            <input type="hidden" name="iDateId" value="{{options.0.iFDateId}}">
+            <div class="Options-container-date">{{fecha}}</div>
+            {{#each options}}
+                <div class="Options-option">
+                    <div class="Options-option-catalog">{{vcCatalog}}</div>
+                    <div class="Options-option-faces" data-catalog="{{iFCatalogId}}">
+                        <div class="Options-option-face smile {{#if bOption1}}active{{/if}}" data-id="1">
+                            <img src="../../assets/img/smiling-face.svg">
+                        </div>
+                        <div class="Options-option-face line {{#if bOption2}}active{{/if}}" data-id="2">
+                            <img src="../../assets/img/serious.svg">
+                        </div>
+                        <div class="Options-option-face sad {{#if bOption3}}active{{/if}}" data-id="3">
+                            <img src="../../assets/img/sad-face.svg">
+                        </div>
                     </div>
                 </div>
+            {{/each}}
+            <div class="Options-container-note p-4">
+                <textarea name="vcNote" class="form-control">{{nota}}</textarea>
             </div>
-        {{/each}}
+            <button type="submit" class="btn btn-block btn-primary">GUARDAR</button>
+        </form>
     </div>
 {{/each}}

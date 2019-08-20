@@ -93,5 +93,22 @@ export default {
             'path': 'Data/GetDates',
             'access_token': User.access_token
         });
-    }
+    },
+    //Registro de Evaluacion
+    //"iType": "1",
+    //"iRelationId": "0",
+    //"iStudentId": "2",
+    //"iDateId": "50",
+    //"vcValues": "2-1|3-2",
+    //"vcNote": "Test"
+    async SetOptions(data) {
+        let User = await this.GetUser();
+
+        return Xhr.ajax({
+            'path': 'Data/SetOptions',
+            'type': 'POST',
+            'access_token': User.access_token,
+            'data': data
+        });
+    },
 }

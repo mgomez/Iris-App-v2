@@ -1,0 +1,24 @@
+{{#each this}}
+    <div class="seguimiento">
+        <h3 class="seguimiento-h3"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{date Fecha}}</h3>
+        {{#each Datos}}
+            <div class="seguimiento-item">
+                <div class="seguimiento-hgroup">
+                    <div class="seguimiento-title">{{vcCatalog}}</div>
+                </div>
+                <div class="seguimiento-block">
+                    {{#if bOption1}}
+                        <i class="fa fa-smile-o" aria-hidden="true"></i>
+                    {{/if}}
+                    {{#if bOption2}}
+                        <i class="fa fa-meh-o" aria-hidden="true"></i>
+                    {{/if}}
+                    {{#if bOption3}}
+                        <i class="fa fa-frown-o" aria-hidden="true"></i>
+                    {{/if}}
+                </div>
+            </div>
+        {{/each}}
+        <p class="seguimiento-observacion"><b>Observacion:</b> {{Observacion}}</p>
+    </div>
+{{/each}}

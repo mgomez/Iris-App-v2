@@ -59,6 +59,7 @@ export default {
                                 app.loading(false);
                                 if (user) {
                                     var estudiantes = await Store.GetStudents();
+                                    user.esMaestra = user.role === "Teacher";
                                     localforage.setItem('User', user);
                                     localforage.setItem('UserTemp', formData.userName);
                                     localforage.setItem("Estudiantes", estudiantes.Data);
@@ -99,6 +100,7 @@ export default {
                 _this.Login(formData).then(async function(user) {
                     app.loading(false);
                     if (user) {
+                        user.esMaestra = user.role === "Teacher";
                         localforage.setItem('User', user);
                         localforage.setItem('UserTemp', formData.userName);
                         var estudiantes = await Store.GetStudents();
