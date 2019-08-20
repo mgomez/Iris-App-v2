@@ -55,19 +55,24 @@ export default {
                         var decripted = AesCtr.decrypt(formData, device.uuid, 256);
                         var data = JSON.parse(decripted);
 
-                        _this.Login(data).then(function(user) {
-                            app.loading(false);
-                            if (user) {
-                                localforage.setItem('User', user);
-                                localforage.setItem('UserTemp', formData.userName);
+                        _this.Login(data).then(async function(user) {
+                                app.loading(false);
+                                if (user) {
+                                    var estudiantes = await Store.GetStudents();
+                                    localforage.setItem('User', user);
+                                    localforage.setItem('UserTemp', formData.userName);
+                                    localforage.setItem("Estudiantes", estudiantes.Data);
+                                    localforage.setItem("esUnico", estudiantes.Data.length > 0);
 
-                                Router.View('main');
-                            } else {
+
+                                    Router.View('main');
+                                } else {
+                                    alert("Ocurrió un error inesperado. intentalo más tarde.");
+                                }
+                            },
+                            function(err) {
                                 alert("Ocurrió un error inesperado. intentalo más tarde.");
-                            }
-                        }, function(err) {
-                            alert("Ocurrió un error inesperado. intentalo más tarde.");
-                        });
+                            });
                     }
                 });
             });
@@ -91,11 +96,14 @@ export default {
             if (validLogin(formData)) {
                 app.loading(true);
 
-                _this.Login(formData).then(function(user) {
+                _this.Login(formData).then(async function(user) {
                     app.loading(false);
                     if (user) {
                         localforage.setItem('User', user);
                         localforage.setItem('UserTemp', formData.userName);
+                        var estudiantes = await Store.GetStudents();
+                        localforage.setItem("Estudiantes", estudiantes.Data);
+                        localforage.setItem("esUnico", estudiantes.Data.length === 1);
 
                         Router.View('main');
                     } else {

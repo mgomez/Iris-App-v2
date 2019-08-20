@@ -12,6 +12,7 @@ import Tool from '../utils/tool';
 import Router from '../router';
 import Store from '../store';
 import templateHtml from "./galeria.tpl.html";
+import _galeriaSwiper from './_galeriaSwiper.html';
 
 export default {
     Dates: [],
@@ -20,45 +21,74 @@ export default {
     },
     async render() {
         var _this = this;
+        var Estudiantes = await localforage.getItem("Estudiantes");
+        var esUnico = await localforage.getItem("esUnico");
         var GetDates = await Store.GetDates();
+        var Galeria = [];
+        var iStudentId = 0;
 
-        var Galeria = await Store.GetImages({
-            iType: 2,
-            iDateId: 49,
-            iStudentId: 2
-        });
+        if (esUnico) {
+            var iDateId = GetDates.Data[0].iDateId;
+
+            iStudentId = Estudiantes[0].iStudentId;
+
+            Galeria = await Store.GetImages({
+                iType: 2,
+                iStudentId: iStudentId,
+                iDateId: iDateId
+            });
+
+            Galeria = Galeria.Data;
+
+            _this.Galeria = Galeria;
+        }
 
         _this.Dates = GetDates.Data;
 
+        var handleData = {
+            Galeria: Galeria,
+            Fechas: GetDates.Data,
+            Estudiantes: Estudiantes,
+            esUnico: esUnico,
+            iStudentId: iStudentId
+        };
 
-        var renderTpl = Tool.renderTpl(templateHtml, {
-            Galeria: Galeria.Data,
-            Fechas: GetDates.Data
-        });
+        var renderTpl = Tool.renderTpl(templateHtml, handleData);
 
         $("#renderBody").html(renderTpl);
 
-        this.handleEvents();
+        this.handleEvents(handleData);
     },
-    handleEvents() {
+    handleEvents(handleData) {
         var _this = this;
 
-        $("#frmGetImages").on("submit", async function() {
+        if (handleData.esUnico) {
+            _this.cargaGaleriaSwiper();
+        }
+
+        $("#frmGetImages").on("submit", async function(e) {
+            e.preventDefault();
+
             var $frm = $(this);
             var formData = $frm.serializeObject();
 
             var Galeria = await Store.GetImages(formData);
 
+            _this.Galeria = Galeria.Data;
+            _this.cargaGaleriaSwiper();
 
-            var renderTpl = Tool.renderTpl(templateHtml, {
-                Galeria: Galeria.Data,
-                Fechas: _this.Dates
-            });
-
-            $("#renderBody").html(renderTpl);
-
-            return false;
         });
+    },
+    cargaGaleriaSwiper() {
+        var _this = this;
+
+        var Galeria = _this.Galeria;
+
+        var renderTpl = Tool.renderTpl(_galeriaSwiper, {
+            Galeria: Galeria
+        });
+
+        $("#galeriaSwiper").html(renderTpl);
 
         var mySwiper = new Swiper('.swiper-container', {
             direction: 'horizontal',
@@ -67,6 +97,17 @@ export default {
                 el: '.swiper-pagination',
                 type: 'progressbar'
             },
+        });
+
+        $(".Galeria-slide-foto").on("click", function() {
+            var url = $(this).data("url");
+            var titulo = $(this).data("titulo");
+            try {
+                window.plugins.socialsharing.share(titulo, null, url, null);
+            } catch (e) {
+                alert("No disponible.");
+                console.log(e);
+            }
         });
 
         $(".Galeria-slide-check").on("click", function() {

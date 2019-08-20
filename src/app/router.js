@@ -22,6 +22,7 @@ import seguimientoModule from './seguimiento/seguimiento';
 import galeriaMaestraModule from './galeriaMaestra/galeriaMaestra';
 import huellaDigital from "./huellaDigital/huellaDigital";
 import pagos from "./pagos/pagos";
+import seguimientoAcademico from "./seguimientoAcademico/seguimientoAcademico";
 
 
 export default {
@@ -67,6 +68,9 @@ export default {
                 break;
             case 'pagos':
                 pagos.init();
+                break;
+            case 'seguimientoAcademico':
+                seguimientoAcademico.init();
                 break;
             default:
                 loginModule.init(page);

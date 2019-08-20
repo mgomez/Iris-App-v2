@@ -1,0 +1,25 @@
+<!--=================================
+=            SEGUIMIENTO            =
+==================================-->
+{{#each this}}
+    <div class="Options-container">
+        <div class="Options-container-date">{{fecha}}</div>
+        <div class="Options-container-note">{{nota}}</div>
+        {{#each options}}
+            <div class="Options-option">
+                <div class="Options-option-catalog">{{vcCatalog}}</div>
+                <div class="Options-option-faces">
+                    <div class="Options-option-face smile {{#if bOption1}}active{{/if}}">
+                        <img src="../../assets/img/smiling-face.svg">
+                    </div>
+                    <div class="Options-option-face line {{#if bOption2}}active{{/if}}">
+                        <img src="../../assets/img/serious.svg">
+                    </div>
+                    <div class="Options-option-face sad {{#if bOption3}}active{{/if}}">
+                        <img src="../../assets/img/sad-face.svg">
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/each}}

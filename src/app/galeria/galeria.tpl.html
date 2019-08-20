@@ -7,7 +7,18 @@
             <h3 class="card-title">Galeria</h3>
             <form id="frmGetImages">
                 <input type="hidden" name="iType" value="2">
-                <input type="hidden" name="iStudentId" value="1">
+                {{#if esUnico}}
+                    <input type="hidden" name="iStudentId" value="{{iStudentId}}">
+                {{else}}
+                    <div class="form-group">
+                        <label>Alumno</label>
+                        <select name="iStudentId" id="cbAlumnos" class="form-control">
+                            {{#each Estudiantes}}
+                                <option value="{{iStudentId}}">{{vcName}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                {{/if}}
                 <div class="form-group">
                     <label>Periodo</label>
                     <select name="iDateId" id="cbPeriodo" class="form-control">
@@ -16,34 +27,11 @@
                         {{/each}}
                     </select>
                 </div>
-                <button class="btn btn-primary">Ver</button>
+                <div class="text-center p-2 m-2">
+                    <button type="submit" class="btn btn-primary btn-block">Ver</button>
+                </div>
             </form>
         </div>
     </div>
-    <div class="swiper-container">
-        <div class="swiper-pagination"></div>
-        <div class="swiper-wrapper">
-            {{#each Galeria}}
-                <div class="swiper-slide">
-                    <div class="Galeria-slide">
-                        <img src="../../assets/img/verify.svg" alt="check" class="Galeria-slide-check" data-type="3" data-image="{{iImageId}}" data-student="{{iFStudentId}}">
-                        <div class="Galeria-slide-title">{{vcTitle}}</div>
-                        <div class="Galeria-slide-foto" data-id="{{iImageId}}">
-                            <img src="https://api.kinderiris.com/Documents/Images/{{vcFile}}" alt="{{vcTitle}}" class="Galeria-slide-foto-img">
-                        </div>
-                        <div class="Galeria-slide-descripcion">{{vcDescription}}</div>
-                        <div class="Galeria-slide-fecha">{{dtDate}}</div>
-                    </div>
-                </div>
-            {{else}}
-                <div class="swiper-slide">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="text-center">No hay imágenes nuevas ✅</h3>
-                        </div>
-                    </div>
-                </div>
-            {{/each}}
-        </div>
-    </div>
 </section>
+<section id="galeriaSwiper"></section>

@@ -3,7 +3,7 @@
  * Seguimiento Academico
  *
  */
-import "./seguimiento.less";
+import "./seguimientoAcademico.less";
 import $ from 'jquery';
 import moment from 'moment';
 import Enumerable from 'linq';
@@ -11,7 +11,7 @@ import localforage from 'localforage';
 import Tool from '../utils/tool';
 import Router from '../router';
 import Store from '../store';
-import templateHtml from "./seguimiento.tpl.html";
+import templateHtml from "./seguimientoAcademico.tpl.html";
 import _optionsTpl from './_optionsTpl.html';
 
 function renderOptions(options) {
