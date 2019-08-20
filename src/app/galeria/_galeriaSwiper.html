@@ -7,13 +7,19 @@
         {{#each Galeria}}
             <div class="swiper-slide">
                 <div class="Galeria-slide">
-                    <img src="../../assets/img/verify.svg" alt="check" class="Galeria-slide-check" data-type="3" data-image="{{iImageId}}" data-student="{{iFStudentId}}">
+                    <img src="../../assets/img/verify.svg" alt="check" class="Galeria-slide-check" data-type="2" data-image="{{iImageId}}" data-student="{{iFStudentId}}">
                     <div class="Galeria-slide-title">{{vcTitle}}</div>
-                    <div class="Galeria-slide-foto" data-id="{{iImageId}}" data-url="https://api.kinderiris.com/Documents/Images/{{vcFile}}" data-titulo="{{vcTitle}}">
-                        <img src="https://api.kinderiris.com/Documents/Images/{{vcFile}}" alt="{{vcTitle}}" class="Galeria-slide-foto-img">
+                    <div class="Galeria-slide-foto socialsharing" data-id="{{iImageId}}" data-url="https://api.kinderiris.com/Documents/Images/{{vcFile}}" data-titulo="{{vcTitle}}">
+                        <img src="https://api.kinderiris.com/Documents/Images/{{vcFile}}" alt="{{vcTeacher}} {{dtDate}}" class="Galeria-slide-foto-img">
                     </div>
                     <div class="Galeria-slide-descripcion">{{vcDescription}}</div>
                     <div class="Galeria-slide-fecha">{{dtDate}}</div>
+                    <div class="Galeria-slide-compartir socialsharing" data-id="{{iImageId}}" data-url="https://api.kinderiris.com/Documents/Images/{{vcFile}}" data-titulo="{{vcTeacher}} {{dtDate}}">
+                        <button class="btn btn-light btn-block">
+                            <img src="../../assets/img/iconos/social-media.svg" width="42px">
+                            <span>Compartir</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         {{else}}

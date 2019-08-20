@@ -73,48 +73,9 @@ export default {
         });
 
         $("#modalDetalleOrden").on("show.bs.modal", function() {
-            var $modalBody = $(this).find(".modal-body");
-            var OrdenDetalle = _this.OrdenDetalle;
-            var expirationYear = [];
-
-            for (var option = 0; option <= 20; option++) {
-                var year = moment().add('years', option).format('YYYY');
-                var yearValue = year.substring(2);
-
-                expirationYear.push({
-                    'text': year,
-                    'value': yearValue
-                });
-            };
-
-            var renderTpl = Tool.renderTpl(_detalleOrden, {
-                Orden: OrdenDetalle,
-                TotalOrden: Enumerable.from(OrdenDetalle).sum("+$.Monto"),
-                expirationYear: expirationYear
-            });
-
-            $modalBody.html(renderTpl);
-
-            $("#btnPagar").on("click", function() {
-                var OrdenDetalle = _this.OrdenDetalle;
-
-                if (OrdenDetalle.length <= 0) {
-                    alert("Ingresa correctamente la informacion necesaria.");
-                } else {
-                    var $form = $("#card-form");
-                    var tokenParams = {
-                        "card": $form.serializeObject()
-                    };
-
-                    console.log(tokenParams);
-
-                    Conekta.Token.create(tokenParams, successResponseHandler, errorResponseHandler);
-                }
-            });
-
-            $("#card-form").on("submit", function() {
-                return false;
-            });
+            _this.ModalDetalleOrden();
+        }).on("hide.bs.modal", function() {
+            $("#numeroDetallesOrden").html(_this.OrdenDetalle.length);
         });
 
 
@@ -171,5 +132,61 @@ export default {
             console.log(error);
             alert(error.message_to_purchaser);
         };
+    },
+    ModalDetalleOrden() {
+        var _this = this;
+        var $modalBody = $("#modalDetalleOrden .modal-body");
+        var OrdenDetalle = _this.OrdenDetalle;
+        var expirationYear = [];
+        //calculo el combo de fecha de expiracion
+        for (var option = 0; option <= 20; option++) {
+            var year = moment().add('years', option).format('YYYY');
+            var yearValue = year.substring(2);
+
+            expirationYear.push({
+                'text': year,
+                'value': yearValue
+            });
+        };
+
+        var renderTpl = Tool.renderTpl(_detalleOrden, {
+            Orden: OrdenDetalle,
+            TotalOrden: Enumerable.from(OrdenDetalle).sum("+$.Monto"),
+            expirationYear: expirationYear
+        });
+
+        $modalBody.html(renderTpl);
+        //elimino cargos de la orden
+        $(".btnEliminarDetalleOrden").on("click", function() {
+            var Concepto = $(this).data("concepto");
+            var ordenActualizada = Enumerable.from(OrdenDetalle).where("$.Concepto != " + Concepto).toArray();
+
+            console.log(OrdenDetalle, ordenActualizada);
+
+            _this.OrdenDetalle = ordenActualizada;
+
+            $("#cbConceptos option[value=" + Concepto + "]").prop("disabled", false);
+
+            _this.ModalDetalleOrden();
+        });
+        //tokeniza la tarjeta y sigue con el proceso de cobro
+        $("#btnPagar").on("click", function() {
+            var OrdenDetalle = _this.OrdenDetalle;
+
+            if (OrdenDetalle.length <= 0) {
+                alert("Ingresa correctamente la informacion necesaria.");
+            } else {
+                var $form = $("#card-form");
+                var tokenParams = {
+                    "card": $form.serializeObject()
+                };
+
+                Conekta.Token.create(tokenParams, successResponseHandler, errorResponseHandler);
+            }
+        });
+
+        $("#card-form").on("submit", function() {
+            return false;
+        });
     }
 }

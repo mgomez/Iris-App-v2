@@ -16,7 +16,13 @@
                 <td>{{NombreConcepto}}</td>
                 <td>{{currency Monto}}</td>
                 <td>
-                    <button class="btn btn-danger btn-sm btnEliminarDetalleOrden" data-index="{{@index}}">&times;</button>
+                    <button class="btn btn-danger btn-sm btnEliminarDetalleOrden" data-index="{{@index}}" data-concepto="{{Concepto}}">&times;</button>
+                </td>
+            </tr>
+        {{else}}
+            <tr>
+                <td colspan="3" class="text-center">
+                    <p class="text-muted">Ingresa algún concepto a pagar. </p>
                 </td>
             </tr>
         {{/each}}

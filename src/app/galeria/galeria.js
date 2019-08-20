@@ -99,7 +99,7 @@ export default {
             },
         });
 
-        $(".Galeria-slide-foto").on("click", function() {
+        $(".socialsharing").on("click", function() {
             var url = $(this).data("url");
             var titulo = $(this).data("titulo");
             try {

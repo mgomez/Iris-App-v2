@@ -1,1 +1,49 @@
-.Galeria-slide{background:#fff url(../../assets/img/Pacman-1s-200px.svg) no-repeat center center;background-size:50%;border-top:5px solid #db3a92;border-right:5px solid #fa4d34;border-bottom:5px solid #81b32d;border-left:5px solid #2cb4ed;margin:20px 0 100px 0;overflow:hidden;position:relative}.Galeria-slide-check{position:absolute;top:7px;right:7px;display:inline-block;width:32px}.Galeria-slide-title{font-size:24px;padding:8px;color:#272727;width:80%}.Galeria-slide-descripcion{padding:35px;background:#fff}.Galeria-slide-fecha{background:#e0e0e0;font-size:12px;font-weight:600;text-align:right;padding:8px}.Galeria-slide-foto{min-height:150px;text-align:center}.Galeria-slide-foto-img{display:inline-block;width:95%;border-radius:10px}
+/**
+ *
+ * Galeria
+ *
+ */
+.Galeria-slide {
+  background: #fff url(../../assets/img/Pacman-1s-200px.svg) no-repeat center center;
+  background-size: 50%;
+  border-top: 5px solid #db3a92;
+  border-right: 5px solid #fa4d34;
+  border-bottom: 5px solid #81b32d;
+  border-left: 5px solid #2cb4ed;
+  overflow: hidden;
+  position: relative;
+}
+.Galeria-slide-check {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: inline-block;
+  width: 32px;
+}
+.Galeria-slide-title {
+  font-size: 24px;
+  padding: 8px;
+  color: #272727;
+  width: 80%;
+}
+.Galeria-slide-descripcion {
+  padding: 35px;
+  background: #fff;
+}
+.Galeria-slide-fecha {
+  background: #fffacf;
+  color: #795548;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px;
+  text-align: right;
+}
+.Galeria-slide-foto {
+  min-height: 150px;
+  text-align: center;
+}
+.Galeria-slide-foto-img {
+  display: inline-block;
+  width: 95%;
+  border-radius: 10px;
+}
