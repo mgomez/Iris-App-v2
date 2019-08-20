@@ -24,9 +24,9 @@
         }
 
         &-note {
-            background: #FFEB3B;
-            text-align: right;
+            background: #fff7b2;
             padding: 0 8px;
+            text-align: center;
         }
     }
 
@@ -55,7 +55,18 @@
 
             &.active {
                 opacity: 1;
-                .pulsate-bck;
+
+                &.smile {
+                    .pulsate-bck;
+                }
+
+                &.line {
+                    .jello-vertical;
+                }
+
+                &.sad {
+                    .shake-bottom;
+                }
             }
 
             & img {
@@ -87,5 +98,89 @@
 
     100% {
         transform: scale(1);
+    }
+}
+
+
+/**
+ * ----------------------------------------
+ * animation jello-vertical
+ * ----------------------------------------
+ */
+.jello-vertical {
+    animation: jello-vertical 0.9s infinite both;
+}
+
+@keyframes jello-vertical {
+    0% {
+        transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    40% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    50% {
+        transform: scale3d(0.85, 1.15, 1);
+    }
+
+    65% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    75% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+
+
+/**
+ * ----------------------------------------
+ * animation shake-bottom
+ * ----------------------------------------
+ */
+.shake-bottom {
+    animation: shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+}
+
+@keyframes shake-bottom {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+        transform-origin: 50% 100%;
+    }
+
+    10% {
+        transform: rotate(2deg);
+    }
+
+    20%,
+    40%,
+    60% {
+        transform: rotate(-4deg);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: rotate(4deg);
+    }
+
+    80% {
+        transform: rotate(-2deg);
+    }
+
+    90% {
+        transform: rotate(2deg);
     }
 }

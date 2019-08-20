@@ -91,7 +91,6 @@ export default {
         $("#galeriaSwiper").html(renderTpl);
 
         var mySwiper = new Swiper('.swiper-container', {
-            direction: 'horizontal',
             autoHeight: true,
             pagination: {
                 el: '.swiper-pagination',

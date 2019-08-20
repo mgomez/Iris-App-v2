@@ -8,6 +8,7 @@ import $ from 'jquery';
 import moment from 'moment';
 import Enumerable from 'linq';
 import localforage from 'localforage';
+import html2canvas from 'html2canvas';
 import Tool from '../utils/tool';
 import Router from '../router';
 import Store from '../store';
@@ -63,6 +64,7 @@ export default {
                 console.log(r);
                 var Options = r.Data;
                 var renderTpl = "";
+
                 if (!Options) {
                     alert("No se encontraron resultados.");
                 } else {
@@ -72,13 +74,34 @@ export default {
 
                     $("#optionsContainer").html(renderTpl);
                 }
+
                 $("#optionsContainer").html(renderTpl);
+
                 $('html, body').animate({
                     scrollTop: $("#optionsContainer").offset().top
                 }, 1300);
+
+                _this.eventosCalificaciones();
             });
 
             return false;
+        });
+    },
+    eventosCalificaciones() {
+        $(".Options-container").on("click", function() {
+            var $container = $(this);
+
+            html2canvas($container[0]).then(canvas => {
+                var base64img = canvas.toDataURL("image/jpeg");
+
+                console.log(base64img);
+                try {
+                    window.plugins.socialsharing.share(null, 'Seguimiento Academico', base64img, null);
+                } catch (e) {
+                    alert("No disponible.");
+                    console.log(e);
+                }
+            });
         });
     }
 }

@@ -4,6 +4,7 @@
  *
  */
 import "./pagos.less";
+import 'notie/dist/notie.min.css';
 import $ from 'jquery';
 import Enumerable from 'linq';
 import localforage from 'localforage';
@@ -11,6 +12,7 @@ import Tool from '../utils/tool';
 import Router from '../router';
 import Store from '../store';
 import moment from 'moment';
+import notie from 'notie';
 import html2canvas from 'html2canvas';
 import templateHtml from "./pagos.html";
 import _detalleOrden from './_detalleOrden.html';
@@ -46,7 +48,7 @@ export default {
     },
     handleEvents() {
         var _this = this;
-
+        //Agregar concepto a la orden
         $("#frmAgregarDetalleOrden").on("submit", function() {
             var $frm = $(this);
             var formData = $frm.serializeObject();
@@ -69,6 +71,12 @@ export default {
             $("#cbConceptos, #iMonto").val("");
 
             console.log(_this.OrdenDetalle);
+            notie.alert({
+                type: 'success',
+                text: "Se agrego " + formData.NombreConcepto + " correctamente!",
+                position: 'top'
+            });
+
             return false;
         });
 
