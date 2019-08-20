@@ -102,10 +102,32 @@ export default {
             var url = $(this).data("url");
             var titulo = $(this).data("titulo");
             try {
-                window.plugins.socialsharing.share(titulo, null, url, null);
+                var options = {
+                    message: titulo,
+                    subject: 'IRIS',
+                    files: [url],
+                    url: '',
+                    chooserTitle: 'Selecciona una app para compartir'
+                };
+
+                var onSuccess = function(result) {
+                    app.loading(false);
+                };
+
+                var onError = function(msg) {
+                    alert("Sharing failed with message: " + msg);
+                    app.loading(false);
+                };
+
+                app.loading(true);
+
+                window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+
+                //window.plugins.socialsharing.share(titulo, null, url, null);
             } catch (e) {
                 alert("No disponible.");
                 console.log(e);
+                app.loading(false);
             }
         });
 

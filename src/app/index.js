@@ -21,7 +21,7 @@ window.$ = $;
 
 window.Connection = true;
 
-Conekta.setPublicKey("key_NpQddeysfUPMiEi8f4qWmKg");
+Conekta.setPublicKey("key_epBSCdx5g5Jh3svABiranxQ");
 Conekta.setLanguage("es");
 
 localforage.config({

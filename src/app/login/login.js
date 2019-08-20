@@ -45,6 +45,7 @@ export default {
     },
     handleEvents() {
         var _this = this;
+        $("#renderBody").css("margin", 0);
         if (app.activeFingerPrint) {
             $("#activeFingerPrint").show();
 
