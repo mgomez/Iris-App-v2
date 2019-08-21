@@ -27,6 +27,38 @@
 <div class="container">
     <div id="renderBody"></div>
 </div>
-<button id="btn-logout" class="LogOut">
-    <img src="../../assets/img/exit-to-app-button.svg" alt="Salir">
+<button id="btn-feedback" class="feedback" data-toggle="modal" data-target="#modalFeedback">
+    <img src="../../assets/img/iconos/angry.svg" alt="feedback">
 </button>
+<button id="btn-logout" class="LogOut">
+    <img src="../../assets/img/iconos/exit.svg" alt="Salir">
+</button>
+<!-- Modal -->
+<div class="modal modal-fullscreen" id="modalFeedback" tabindex="-1" role="dialog" aria-labelledby="modalFeedback" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Feedback</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Gracias por tomarse el tiempo para darnos sus comentarios. Nos está ayudando a entender qué es lo que hacemos bien y qué mejoras debemos implementar</p>
+                <form id="fmr-SetSuggestion">
+                    <div class="p-4 m-4">
+                        <img src="../../assets/img/iconos/angry.svg" alt="feedback" class="img-fluid">
+                    </div>
+                    <div class="form-group">
+                        <label>Comentario o Sugerencia</label>
+                        <textarea name="vcData" class="form-control"></textarea>
+                    </div>
+                    <div class="p-2">
+                        <small class="text-muted">* La información proporcionada será utilizada únicamente para la mejora de nuestro servicio y es estrictamente confidencial.</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

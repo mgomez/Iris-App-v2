@@ -111,4 +111,14 @@ export default {
             'data': data
         });
     },
+    async SetSuggestion(data) {
+        let User = await this.GetUser();
+
+        return Xhr.ajax({
+            'path': 'Data/SetSuggestion',
+            'type': 'POST',
+            'access_token': User.access_token,
+            'data': data
+        });
+    },
 }

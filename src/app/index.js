@@ -3,7 +3,6 @@
  * INDEX
  *
  */
-
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap4-fs-modal/dist/css/bootstrap-fs-modal.css";
 import "../assets/css/app.less";
@@ -48,6 +47,7 @@ window.app = {
             //oculta la vista de loading
             _this.loading(false);
             $("body").addClass('ready');
+
         });
         //phonegap listener
         document.addEventListener("deviceready", this.deviceReady, false);

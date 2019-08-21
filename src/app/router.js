@@ -9,6 +9,7 @@ import $ from 'jquery';
 import localforage from 'localforage';
 import Tool from './utils/tool';
 import Store from './store';
+import notie from 'notie';
 
 //views
 import layout from "./shared/layout.tpl.html";
@@ -49,6 +50,26 @@ export default {
         renderTpl = Tool.renderTpl(renderTpl, User);
 
         $("#app").html(renderTpl);
+
+        //formulario Feedback
+        $("#fmr-SetSuggestion").on("submit", function() {
+            var $frm = $(this);
+            var formData = $frm.serializeObject();
+
+            console.log(formData);
+
+            Store.SetSuggestion(formData).then(function(r) {
+                notie.alert({
+                    type: 'success',
+                    text: "Muchas gracias por el feedback recibido.",
+                    position: 'top'
+                });
+                $frm[0].reset();
+                $("#modalFeedback").modal("hide");
+            });
+
+            return false;
+        });
 
         switch (page) {
             case 'main':
