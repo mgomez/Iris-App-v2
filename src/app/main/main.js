@@ -17,8 +17,12 @@ export default {
     },
     async render() {
         var User = await localforage.getItem("User");
+        var GetEvents = await Store.GetEvents();
 
-        var renderTpl = Tool.renderTpl(templateHtml, { User: User });
+        var renderTpl = Tool.renderTpl(templateHtml, {
+            User: User,
+            Eventos: GetEvents.Data.Result
+        });
 
         $("#renderBody").html(renderTpl);
 

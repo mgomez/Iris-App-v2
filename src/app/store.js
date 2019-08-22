@@ -121,4 +121,13 @@ export default {
             'data': data
         });
     },
+    async GetEvents() {
+        let User = await this.GetUser();
+
+        return Xhr.ajax({
+            'path': 'Data/GetEvents',
+            'type': 'POST',
+            'access_token': User.access_token
+        });
+    },
 }
