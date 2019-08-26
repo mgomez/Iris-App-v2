@@ -19,7 +19,7 @@ var AesCtr = require("../assets/js/aes-ctr");
 window.$ = $;
 
 window.Connection = true;
-
+//Produccion
 Conekta.setPublicKey("key_epBSCdx5g5Jh3svABiranxQ");
 Conekta.setLanguage("es");
 

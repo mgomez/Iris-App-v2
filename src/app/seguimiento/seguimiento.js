@@ -35,6 +35,7 @@ function renderOptions(options) {
 }
 
 export default {
+    Options: [],
     init() {
         this.render();
     },
@@ -43,58 +44,90 @@ export default {
         var Estudiantes = await localforage.getItem("Estudiantes");
         var esUnico = await localforage.getItem("esUnico");
         var GetDates = await Store.GetDates();
-        var Galeria = [];
+        var GetOptions = [];
         var iStudentId = 0;
 
-        var renderTpl = Tool.renderTpl(templateHtml, {
+        if (esUnico) {
+            var iDateId = GetDates.Data[0].iDateId;
+
+            iStudentId = Estudiantes[0].iStudentId;
+
+            GetOptions = await Store.GetOptions({
+                iType: 1,
+                iStudentId: iStudentId,
+                iDateId: iDateId
+            });
+
+            var Options = GetOptions.Data;
+
+            _this.Options = Options;
+        }
+
+        var handleData = {
             Estudiantes: Estudiantes,
             Fechas: GetDates.Data,
             esUnico: esUnico,
             iStudentId: iStudentId
-        });
+        };
+
+        var renderTpl = Tool.renderTpl(templateHtml, handleData);
 
         $("#renderBody").html(renderTpl);
 
-        this.handleEvents();
+        this.handleEvents(handleData);
     },
-    handleEvents() {
+    handleEvents(handleData) {
         var _this = this;
 
         moment.locale('es');
 
-        $("#frm-getOptions").on("submit", function() {
+        if (handleData.esUnico) {
+            _this.cargaOptions();
+        }
+
+        $("#frm-getOptions").on("submit", async function(e) {
+            e.preventDefault();
+
             var formData = $(this).serializeObject();
 
-            Store.GetOptions(formData).then(function(r) {
-                console.log(r);
-                var Options = r.Data;
-                var renderTpl = "";
+            var Options = await Store.GetOptions(formData);
 
-                if (!Options) {
-                    alert("No se encontraron resultados.");
-                } else {
-                    var _options = renderOptions(Options);
+            _this.Options = Options.Data;
 
-                    renderTpl = Tool.renderTpl(_optionsTpl, _options);
-
-                    $("#optionsContainer").html(renderTpl);
-                }
-
-                $("#optionsContainer").html(renderTpl);
-
-                $('html, body').animate({
-                    scrollTop: $("#optionsContainer").offset().top
-                }, 1300);
-
-                _this.eventosCalificaciones();
-            });
+            _this.cargaOptions();
 
             return false;
         });
     },
+    cargaOptions() {
+        var _this = this;
+        var Options = _this.Options;
+        var renderTpl = "";
+
+        if (!Options) {
+            alert("No se encontraron resultados.");
+        } else {
+            var _options = renderOptions(Options);
+
+            renderTpl = Tool.renderTpl(_optionsTpl, _options);
+
+            $("#optionsContainer").html(renderTpl);
+        }
+
+        $("#optionsContainer").html(renderTpl);
+
+        $('html, body').animate({
+            scrollTop: $("#optionsContainer").offset().top
+        }, 1300);
+
+        _this.eventosCalificaciones();
+    },
     eventosCalificaciones() {
-        $(".Options-container").on("click", function() {
-            var $container = $(this);
+        $(".btnCompartir").on("click", function() {
+            var $btn = $(this);
+            var $container = $btn.parent(".Options-container");
+
+            app.loading(true);
 
             html2canvas($container[0]).then(canvas => {
                 var base64img = canvas.toDataURL("image/jpeg");
@@ -102,11 +135,14 @@ export default {
                 console.log(base64img);
                 try {
                     window.plugins.socialsharing.share(null, 'Seguimiento Academico', base64img, null);
+                    app.loading(false);
                 } catch (e) {
+                    app.loading(false);
                     alert("No disponible.");
                     console.log(e);
                 }
             });
         });
-    }
+    },
+
 }

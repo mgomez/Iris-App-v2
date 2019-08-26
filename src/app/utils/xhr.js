@@ -46,6 +46,9 @@ export default {
                                     alert("La sesión ha expirado.");
                                     Router.View('login', true);
                                     break;
+                                case 500:
+                                    alert("Ocurrió un error inesperado, por favor inténtalo mas tarde.");
+                                    break;
                                 default:
                                     break;
                             }
