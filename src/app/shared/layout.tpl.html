@@ -2,6 +2,9 @@
 =            LAYOUT            =
 =============================-->
 <div id="header" class="Header" data-role="{{role}}">
+    <button class="Header-link routerView" data-view="main" data-layout="false">
+        <img src="../../assets/img/iconos/kindergarten.svg" alt="main">
+    </button>
     {{#if esMaestra}}
         <button class="Header-link routerView" data-view="galeriaMaestra" data-layout="false" data-role="Teacher">
             <img src="../../assets/img/camera.svg" alt="Alta Galeria">
@@ -11,7 +14,7 @@
         </button>
     {{else}}
         <button class="Header-link routerView" data-view="galeria" data-layout="false" data-rol="Parent">
-            <img src="../../assets/img/gallery.svg" alt="Galeria">
+            <img src="../../assets/img/iconos/blackboard.svg" alt="Galeria">
         </button>
         <button class="Header-link routerView" data-view="pagos" data-layout="false" data-role="Parent">
             <img src="../../assets/img/cash-pay.svg" alt="Pagos">

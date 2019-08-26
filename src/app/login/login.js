@@ -9,9 +9,10 @@ import localforage from 'localforage';
 import Tool from '../utils/tool';
 import Router from '../router';
 import Store from '../store';
+import AesCtr from "../../assets/js/aes-ctr.js";
 import templateHtml from "./login.tpl.html";
 
-
+//valida el formulario de login
 function validLogin(formData) {
     $(".login-control").removeClass('invalid');
 
@@ -31,10 +32,10 @@ function validLogin(formData) {
 export default {
     cambioHuella: false,
     init(e) {
-        console.log("LOGIN", e);
         this.render();
     },
     async render() {
+        //ultimo usuario que ingreso a la app
         var UserTemp = await localforage.getItem("UserTemp");
 
         var renderTpl = Tool.renderTpl(templateHtml, { UserTemp: UserTemp });
@@ -45,7 +46,9 @@ export default {
     },
     handleEvents() {
         var _this = this;
+        //quita el margen de renderBody 
         $("#renderBody").css("margin", 0);
+        //valida que este activo el login por huella digital
         if (app.activeFingerPrint) {
             $("#activeFingerPrint").show();
 
@@ -56,21 +59,8 @@ export default {
                         var decripted = AesCtr.decrypt(formData, device.uuid, 256);
                         var data = JSON.parse(decripted);
 
-                        _this.Login(data).then(async function(user) {
-                                app.loading(false);
-                                if (user) {
-                                    var estudiantes = await Store.GetStudents();
-                                    user.esMaestra = user.role === "Teacher";
-                                    localforage.setItem('User', user);
-                                    localforage.setItem('UserTemp', formData.userName);
-                                    localforage.setItem("Estudiantes", estudiantes.Data);
-                                    localforage.setItem("esUnico", estudiantes.Data.length > 0);
-
-
-                                    Router.View('main');
-                                } else {
-                                    alert("Ocurrió un error inesperado. intentalo más tarde.");
-                                }
+                        _this.Login(data).then(function(user) {
+                                _this.LoginExitoso(user, data);
                             },
                             function(err) {
                                 alert("Ocurrió un error inesperado. intentalo más tarde.");
@@ -99,19 +89,7 @@ export default {
                 app.loading(true);
 
                 _this.Login(formData).then(async function(user) {
-                    app.loading(false);
-                    if (user) {
-                        user.esMaestra = user.role === "Teacher";
-                        localforage.setItem('User', user);
-                        localforage.setItem('UserTemp', formData.userName);
-                        var estudiantes = await Store.GetStudents();
-                        localforage.setItem("Estudiantes", estudiantes.Data);
-                        localforage.setItem("esUnico", estudiantes.Data.length === 1);
-
-                        Router.View('main');
-                    } else {
-                        alert("Ocurrió un error inesperado. intentalo más tarde.");
-                    }
+                    _this.LoginExitoso(user, formData);
                 });
             }
             return false;
@@ -141,5 +119,22 @@ export default {
                 }
                 app.loading(false);
             });
+    },
+    async LoginExitoso(user, formData) {
+        if (user) {
+            user.esMaestra = user.role === "Teacher";
+
+            localforage.setItem('User', user);
+            localforage.setItem('UserTemp', formData.userName);
+
+            var estudiantes = await Store.GetStudents();
+
+            localforage.setItem("Estudiantes", estudiantes.Data);
+            localforage.setItem("esUnico", estudiantes.Data.length === 1);
+
+            Router.View('main');
+        } else {
+            alert("Ocurrió un error inesperado. intentalo más tarde.");
+        }
     }
 }
