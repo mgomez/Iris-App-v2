@@ -3,3 +3,8 @@
  * Main
  *
  */
+.main .table th {
+  background: #fe751b;
+  color: #fff;
+  font-weight: 400;
+}
