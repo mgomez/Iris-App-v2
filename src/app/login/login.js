@@ -123,6 +123,7 @@ export default {
     async LoginExitoso(user, formData) {
         if (user) {
             user.esMaestra = user.role === "Teacher";
+            user.esAdmin = user.role === "Administrator";
 
             localforage.setItem('User', user);
             localforage.setItem('UserTemp', formData.userName);

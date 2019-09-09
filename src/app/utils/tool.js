@@ -1,5 +1,6 @@
 'use strict';
 import Handlebars from 'handlebars';
+import '../../assets/js/swag';
 import currencyFormatter from 'currency-formatter';
 
 Handlebars.registerHelper('currency', function(value, options) {
@@ -19,6 +20,8 @@ export default {
         }
     },
     renderTpl(source, data) {
+        Swag.registerHelpers(Handlebars);
+
         var template = Handlebars.compile(source);
 
         return template(data);

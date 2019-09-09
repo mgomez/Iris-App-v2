@@ -5,14 +5,13 @@
     <button class="Header-link routerView" data-view="main" data-layout="false">
         <img src="../../assets/img/iconos/kindergarten.svg" alt="main">
     </button>
-    {{#if esMaestra}}
+    {{#if esAdmin}}
         <button class="Header-link routerView" data-view="galeriaMaestra" data-layout="false" data-role="Teacher">
             <img src="../../assets/img/camera.svg" alt="Alta Galeria">
         </button>
         <button class="Header-link routerView" data-view="seguimientoAcademico" data-layout="false" data-role="Teacher">
             <img src="../../assets/img/iconos/checklist.svg" alt="seguimientoAcademico">
         </button>
-    {{else}}
         <button class="Header-link routerView" data-view="galeria" data-layout="false" data-rol="Parent">
             <img src="../../assets/img/iconos/blackboard.svg" alt="Galeria">
         </button>
@@ -22,6 +21,25 @@
         <button class="Header-link routerView" data-view="seguimiento" data-layout="false" data-role="Parent">
             <img src="../../assets/img/a-mark.svg" alt="seguimiento">
         </button>
+    {{else}}
+        {{#if esMaestra}}
+            <button class="Header-link routerView" data-view="galeriaMaestra" data-layout="false" data-role="Teacher">
+                <img src="../../assets/img/camera.svg" alt="Alta Galeria">
+            </button>
+            <button class="Header-link routerView" data-view="seguimientoAcademico" data-layout="false" data-role="Teacher">
+                <img src="../../assets/img/iconos/checklist.svg" alt="seguimientoAcademico">
+            </button>
+        {{else}}
+            <button class="Header-link routerView" data-view="galeria" data-layout="false" data-rol="Parent">
+                <img src="../../assets/img/iconos/blackboard.svg" alt="Galeria">
+            </button>
+            <button class="Header-link routerView" data-view="pagos" data-layout="false" data-role="Parent">
+                <img src="../../assets/img/cash-pay.svg" alt="Pagos">
+            </button>
+            <button class="Header-link routerView" data-view="seguimiento" data-layout="false" data-role="Parent">
+                <img src="../../assets/img/a-mark.svg" alt="seguimiento">
+            </button>
+        {{/if}}
     {{/if}}
     <button class="Header-link routerView" data-view="huellaDigital" data-layout="false">
         <img src="../../assets/img/iconos/fingerprint.svg" alt="huellaDigital">
