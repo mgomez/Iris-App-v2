@@ -27,8 +27,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    user-select: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+    color: transparent;
 }
 
 html {
@@ -40,11 +45,16 @@ body {
     min-height: 100vh;
 }
 
+@marginTopiOS: 20px;
+
 body {
     font-size: 16px;
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -webkit-user-select: none;
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+
     background: #fff url("../img/icono.svg") no-repeat bottom fixed;
     background-size: contain;
     font-family: do_hyeonregular;
@@ -54,6 +64,19 @@ body {
     &.ready {
         &::before {
             transform: translateY(0);
+        }
+    }
+
+    &.iOS {
+        &:before {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, #dcdcdc, #a5a5a5);
+            height: 20px;
+            z-index: 99999;
+            content: "";
         }
     }
 
