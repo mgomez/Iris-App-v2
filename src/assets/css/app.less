@@ -62,7 +62,7 @@ body {
     z-index: 1;
 
     &.ready {
-        &::before {
+        &:before {
             transform: translateY(0);
         }
     }
@@ -80,7 +80,7 @@ body {
         }
     }
 
-    &::before {
+    &:before {
         content: "";
         position: fixed;
         bottom: 0;
@@ -97,6 +97,11 @@ body {
             background-size: 50%;
         }
     }
+}
+
+#app {
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .card {
