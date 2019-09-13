@@ -42,7 +42,8 @@ html {
 
 html,
 body {
-    min-height: 100vh;
+    height: 100vh;
+    overflow: auto;
 }
 
 @marginTopiOS: 20px;
@@ -62,12 +63,14 @@ body {
     z-index: 1;
 
     &.ready {
-        &::before {
+        &:after {
             transform: translateY(0);
         }
     }
 
     &.iOS {
+        padding-top: @marginTopiOS;
+
         &:before {
             position: fixed;
             top: 0;
@@ -80,7 +83,7 @@ body {
         }
     }
 
-    &::before {
+    &:after {
         content: "";
         position: fixed;
         bottom: 0;
@@ -97,6 +100,17 @@ body {
             background-size: 50%;
         }
     }
+
+    &.keyboardDidShow {
+        & .Login {
+            position: absolute;
+            top: 0;
+        }
+    }
+}
+
+body.keyboardDidShow.iOS {
+    padding-bottom: 50vh;
 }
 
 .card {

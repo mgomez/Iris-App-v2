@@ -30,8 +30,10 @@ export default {
     handleEvents() {
         var _this = this;
 
-        $("#btn-takePhoto").on("click", function() {
-            app.getPicture("CAMERA").then(function(imageData) {
+        $(".GaleriaMaestra-camara-boton").on("click", function() {
+            var source = $(this).data("source");
+
+            app.getPicture(source).then(function(imageData) {
                 $("#studentImage-b64").val(imageData);
                 $("#studentImage-img").attr("src", "data:image/jpeg;base64," + imageData);
                 $(".GaleriaMaestra-preview").show();

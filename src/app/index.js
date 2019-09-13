@@ -38,7 +38,10 @@ window.app = {
     async init() {
         var _this = this;
         //Polyfill para eliminar retrasos de clics en los navegadores con IU táctiles
-        FastClick.attach(document.body);
+        document.addEventListener('DOMContentLoaded', function() {
+            FastClick.attach(document.body);
+            console.log(FastClick);
+        }, false);
 
         _this.activeFingerPrint = await localforage.getItem("activeFingerPrint") || false;
         _this.touchid = await localforage.getItem("touchid") || false;
@@ -123,10 +126,12 @@ window.app = {
         app.setupPush();
         //oculto el footer si el teclado se muestra
         window.addEventListener('keyboardDidShow', function() {
+            $("body").addClass('keyboardDidShow');
             $("#btn-logout").hide();
         });
 
         window.addEventListener('keyboardDidHide', function() {
+            $("body").removeClass('keyboardDidShow');
             $("#btn-logout").show();
         });
     },

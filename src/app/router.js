@@ -28,7 +28,7 @@ import seguimientoAcademico from "./seguimientoAcademico/seguimientoAcademico";
 
 export default {
     async View(page, _default) {
-        console.log(page, _default);
+        app.loading(true);
         var renderTpl = "";
         var User = await Store.GetUser();
 
@@ -98,5 +98,7 @@ export default {
                 loginModule.init(page);
                 break;
         }
+
+        app.loading(false);
     }
 };
