@@ -2,11 +2,6 @@
 =            Galeria (Maestra)            =
 ===============================-->
 <section id="galeriaMaestra" class="GaleriaMaestra">
-    <div class="GaleriaMaestra-camara">
-        <button id="btn-takePhoto" type="button" class="GaleriaMaestra-camara-boton">
-            <img src="../../assets/img/photo-camera-with-heart.svg" class="GaleriaMaestra-camara-boton-img">
-        </button>
-    </div>
     <div class="card">
         <div class="card-body">
             <h3 class="card-title">Galeria</h3>
@@ -21,9 +16,17 @@
                     <label>Alumno</label>
                     <select name="iStudentId" id="cbAlumnos" class="form-control">
                         {{#each Estudiantes}}
-                            <option value="{{iStudentId}}">{{vcName}}</option>
+                        <option value="{{iStudentId}}">{{vcName}}</option>
                         {{/each}}
                     </select>
+                </div>
+                <div class="GaleriaMaestra-camara d-flex justify-content-around align-items-center my-4">
+                    <button type="button" class="GaleriaMaestra-camara-boton" data-source="PHOTOLIBRARY">
+                        <img src="../../assets/img/gallery.svg" class="GaleriaMaestra-camara-boton-img">
+                    </button>
+                    <button type="button" class="GaleriaMaestra-camara-boton" data-source="CAMERA">
+                        <img src="../../assets/img/iconos/camera.svg" class="GaleriaMaestra-camara-boton-img">
+                    </button>
                 </div>
                 <div class="GaleriaMaestra-preview">
                     <input type="hidden" id="studentImage-b64" name="b64">

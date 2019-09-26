@@ -42,7 +42,8 @@ html {
 
 html,
 body {
-    min-height: 100vh;
+    height: 100vh;
+    overflow: auto;
 }
 
 @marginTopiOS: 20px;
@@ -68,6 +69,8 @@ body {
     }
 
     &.iOS {
+        padding-top: @marginTopiOS;
+
         &:before {
             position: fixed;
             top: 0;
@@ -97,6 +100,19 @@ body {
             background-size: 50%;
         }
     }
+
+    &.keyboardDidShow {
+        & .Login {
+            position: absolute;
+            top: 0;
+            width: 100vw;
+            left: 0;
+        }
+    }
+}
+
+body.keyboardDidShow.iOS {
+    padding-bottom: 50vh;
 }
 
 #app {
